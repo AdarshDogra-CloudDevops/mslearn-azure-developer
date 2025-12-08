@@ -32,11 +32,11 @@ In this section of the exercise, you create a resource group and an Azure Storag
     | -- | -- |
     | `myApiName` | **myApi-<inject key="Deployment-ID" enableCopy="false"/>** |
     | `myLocation`|  **(2)** |
-    | `myEmail` | **Email/Username**:<inject key="AzureAdUserEmail"></inject> |
+    | `myEmail` | <inject key="AzureAdUserEmail"></inject> |
     |`myResourceGroup` | **ApiService-<inject key="Deployment-ID" enableCopy="false"/>** |
 
     ```bash
-    myApiName=import-apim-$RANDOM
+    myApiName=<myapiname>
     myLocation=<myLocation>
     myEmail=<myEmail>
     myResourceGroup=<myResourceGroup>
@@ -46,18 +46,23 @@ In this section of the exercise, you create a resource group and an Azure Storag
 5. Create an APIM instance:
 
     ```bash
-    az apim create -n $myApiName     --location $myLocation     --publisher-email $myEmail     --resource-group $myResourceGroup     --publisher-name Import-API-Exercise     --sku-name Consumption
+    az apim create -n $myApiName \
+        --location $myLocation \
+        --publisher-email $myEmail  \
+        --resource-group $myResourceGroup \
+        --publisher-name Import-API-Exercise \
+        --sku-name Consumption 
     ```
      ![](./media/A04.png)
 
-> **Note:** The operation should complete in about five minutes.
+> **Note:** The operation should complete within approximately five minutes.
 ---
 
 # Exercise 2: Import a Backend API
 
 1. Search for **API Management services** in Azure Portal and select your instance **myApi-<inject key="Deployment-ID" enableCopy="false"/>**.
 
-    ![](./media/A005.png)
+     ![](./media/A005.png)
 
 2. Once the API **myApi-<inject key="Deployment-ID" enableCopy="false"/>** page opens, under **APIs (1)** from the left panel select **APIs (2)**. And select **OpenAPI** (3)
 

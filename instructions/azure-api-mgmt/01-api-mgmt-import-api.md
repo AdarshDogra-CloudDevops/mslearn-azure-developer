@@ -30,10 +30,10 @@ In this section of the exercise, you create a resource group and an Azure Storag
 
     | Settings | Values |
     | -- | -- |
-    | `myApiName` | **myApi-<inject key="DeploymentID" enableCopy="false"/>** |
+    | `myApiName` | **myApi-<inject key="Deployment-ID" enableCopy="false"/>** |
     | `myLocation`|  **(2)** |
     | `myEmail` | <inject key="AzureAdUserEmail"></inject> |
-    |`myResourceGroup` | **ApiService-<inject key="DeploymentID" enableCopy="false"/>** |
+    |`myResourceGroup` | **ApiService-<inject key="Deployment-ID" enableCopy="false"/>** |
 
     ```bash
     myApiName=<myapiname>

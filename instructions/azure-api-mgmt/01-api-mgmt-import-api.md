@@ -14,19 +14,19 @@ In this lab, you will perform:
 ## Estimated Timing: 20 minutes
 # Exercise 1: Create an API Management instance
 
-In this section of the exercise you create a resource group and Azure Storage account. You also record the endpoint, and access key for the account.
+In this section of the exercise, you create a resource group and an Azure Storage account. You also record the endpoint and access key for the account.
 
-1. Use the **[>_] (1)** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a **Bash (2)** environment.
+1. Use the **[>_] (1)** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **Bash (2)** environment.
 
      ![](./media/A01.png)
 
      ![](./media/A02.png)
 
-2.  If you are prompted to select a storage account to persist your files, select **No storage account required (1)**, select default **subscription (2)**, and then select **Apply (3)**.
+2.  If you are prompted to select a storage account to persist your files, select **No storage account required (1)**, select the default **subscription (2)**, and then select **Apply (3)**.
 
     ![](./media/A03.png)
 
-4. Now create variables using the code below. Click on it, paste the following into note pad and update the values accordingly and run in Bash:
+4. Now create variables using the code below. Copy it into Notepad, update the values accordingly, and then run it in the Bash terminal:
 
     | Settings | Values |
     | -- | -- |
@@ -63,7 +63,7 @@ In this section of the exercise you create a resource group and Azure Storage ac
 
     ![](./media/A007.png)
 
-3. In the **Create from OpenAPI specification** tab set mode to **Full (1)** and follow these instructions to fill out the properties:
+3. In the **Create from OpenAPI specification** tab, set mode to **Full (1)** and follow these instructions to fill out the properties:
 
 Use:
 

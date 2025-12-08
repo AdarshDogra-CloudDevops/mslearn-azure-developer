@@ -1,0 +1,13 @@
+[
+    {
+        "Name": "Module-10 Create Blob storage resources with the .NET client library",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-storage",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-storage/01-blob-storage-resources-dotnet.md",
+                "Order": 1
+            }
+        ]
+    }
+]

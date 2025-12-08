@@ -1,0 +1,17 @@
+[
+    {
+        "Name": "Module-04 Azure App Service",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-app-service",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-service/01-app-service-deploy-container.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-service/02-app-service-deployment-slots.md",
+                "Order": 2
+            }
+        ]
+    }
+]

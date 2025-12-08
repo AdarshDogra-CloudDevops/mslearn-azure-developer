@@ -1,0 +1,13 @@
+[
+    {
+        "Name": "Module-08 Create an Azure Function with Visual Studio Code",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-functions",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-functions/01-functions-create-vscode-http.md",
+                "Order": 1
+            }
+        ]
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+        "Name": "Module 01 - Import and configure an API with Azure API Management",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/main/instructions/azure-api-mgmt",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/main/instructions/azure-api-mgmt/01-api-mgmt-import-api.md",
+                "Order": 1
+            }
+        ]
+    }
+]

@@ -1,4 +1,4 @@
-# Lab: Import and configure an API with Azure API Management
+# Lab 1: Import and configure an API with Azure API Management
 
 ## Lab Scenario
 In this exercise, you create an Azure API Management instance, import an OpenAPI specification backend API, configure the API settings including the web service URL and subscription requirements, and test the API operations to verify they work correctly.

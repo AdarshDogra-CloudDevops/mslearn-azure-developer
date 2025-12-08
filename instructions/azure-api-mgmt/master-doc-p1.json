@@ -1,6 +1,6 @@
 [
     {
-        "Name": "Module 01 - Import and configure an API with Azure API Management",
+        "Name": "Module-01 Import and configure an API with Azure API Management",
         "Language": "English",
         "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/main/instructions/azure-api-mgmt",
         "Files": [

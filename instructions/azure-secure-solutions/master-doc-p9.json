@@ -1,0 +1,17 @@
+[
+    {
+        "Name": "Module-09 Secure solutions in Azure",
+        "Language": "English",
+        "BaseURL": "",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-secure-solutions/01-key-vault-store-retrieve.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-secure-solutions/02-app-config-retrieve.md",
+                "Order": 2
+            }
+        ]
+    }
+]

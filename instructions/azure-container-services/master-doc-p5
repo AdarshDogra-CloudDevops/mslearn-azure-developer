@@ -1,0 +1,21 @@
+[
+    {
+        "Name": "Module-05 Azure container services",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-container-services",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-container-services/01-container-image-acr-tasks.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-container-services/02-run-container-aci.md",
+                "Order": 2
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-container-services/03-deploy-to-container-apps.md",
+                "Order": 3
+            }
+        ]
+    }
+]

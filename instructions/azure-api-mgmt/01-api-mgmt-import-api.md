@@ -65,12 +65,10 @@ In this section of the exercise, you create a resource group and an Azure Storag
 
 3. In the **Create from OpenAPI specification** tab, set mode to **Full (1)** and follow these instructions to fill out the properties:
 
-Use:
-
-| Setting | Value |
-|--------|--------|
-| **OpenAPI Specification** | `https://petstore3.swagger.io/api/v3/openapi.json` **(2)** |
-| **URL scheme** | HTTPS **(3)** |
+     | Setting | Value |
+     |--------|--------|
+     | **OpenAPI Specification** | `https://petstore3.swagger.io/api/v3/openapi.json` **(2)** |
+     | **URL scheme** | HTTPS **(3)** |
 
 4. Select **Create (4)**.
 

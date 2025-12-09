@@ -16,35 +16,42 @@ In this lab, you will perform:
 
 ### Task 1: Create a Web App with Application Insights enabled
 
-1. In your browser, navigate to the Azure portal: https://portal.azure.com and sign in with your Azure credentials if prompted.
-2. Select **+ Create a resource** located under the **Azure Services** heading on the homepage.
-3. In the **Search the Marketplace** bar, enter **web app** and press **Enter**.
-4. In the Web App tile, select the **Create** dropdown and then select **Web App**.
+1. Select **+ Create a resource** located under the **Azure Services** heading on the homepage.
 
-![Screenshot of the Web App tile.](./media/create-web-app-tile.png)
+
+
+2. In the **Search the Marketplace** bar, enter **web app** and press **Enter**.
+3. In the Web App tile, select the **Create** dropdown and then select **Web App**.
+
+![](./media/create-web-app-tile.png)
 
 5. On the **Basics** tab, configure the following settings:
 
 | Setting | Action |
 |--|--|
 | **Subscription** | Retain the default value. |
-| **Resource group** | Select **Create new**, enter `rg-WebApp`, and select **OK**. (You may also choose an existing resource group.) |
-| **Name** | Enter a unique name, for example `YOUR-INITIALS-monitorapp`. Replace **YOUR-INITIALS** with your initials or another unique value. |
+| **Resource group** | Choose an existing resource group.  |
+| **Name** | Enter a unique name `webapp-<inject key="DeploymentID" enableCopy="false"/>`.|
 | Slider under **Name** | Turn it off (if visible). |
 | **Publish** | Select **Code**. |
 | **Runtime stack** | Select **.NET 8 (LTS)**. |
 | **Operating system** | Select **Windows**. |
 | **Region** | Retain the default selection or choose a region near you. |
 | **Windows Plan** | Retain the default selection. |
-| **Pricing plan** | Select **Free F1**. |
+| **Pricing plan** | Select **S1**. |
+
+   > Note : If you're not able to see S1 pricing plan click on explore more pricing plan and choose S1
 
 6. Navigate to the **Monitor + secure** tab and configure:
 
 | Setting | Action |
 |--|--|
 | **Enable Application Insights** | Select **Yes**. |
-| **Application Insights** | Select **Create new**, enter `autoinstrument-insights`, and select **OK**. |
-| **Workspace** | Enter `Workspace` if the field is not already populated and locked. |
+| **Application Insights** | Select **Create new**, enter `autoinstrument-insights-<inject key="DeploymentID" enableCopy="false"/>`, and select **OK**. |
+| **Workspace** | Select **create new** Enter `Workspace-<inject key="DeploymentID" enableCopy="false"/>` if the field is not already populated and locked. |
+
+   > **Note:** If the **Enable Application Insights** is disabled use diffent regions 
+       like West US, North Europe, East US, Southeast Asia.
 
 7. Select **Review + create** → Review your configuration → Select **Create**.
 8. After deployment completes, select **Go to resource**.

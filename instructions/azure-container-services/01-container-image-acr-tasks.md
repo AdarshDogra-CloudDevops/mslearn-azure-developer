@@ -1,47 +1,49 @@
----
-lab:
-    topic: Azure container services
-    title: 'Build and run a container image with Azure Container Registry Tasks'
-    description: 'Learn how to use Azure CLI commands to build and run container images with Azure Container Registry Tasks.'
----
+# Lab 5: Azure container services
 
-# Build and run a container image with Azure Container Registry Tasks
+## Lab Scenario
 
 In this exercise, you build a container image from your application code and push it to Azure Container Registry using Azure CLI. You learn how to prepare your app for containerization, create an ACR instance, and store your container image in Azure.
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
-* Create an Azure Container Registry resource
-* Build and push an image from a Dockerfile
-* Verify the results
-* Run the image in the Azure Container Registry
+* Task 1: Create an Azure Container Registry resource
+* Task 2: Build and push an image from a Dockerfile
+* Task 3: Verify the results
+* Task 4: Run the image in the Azure Container Registry
 
-This exercise takes approximately **20** minutes to complete.
+## Estimated Timing: 20 Minutes
 
-## Create an Azure Container Registry resource
+## Exercise 1: Build and run a container image with Azure Container Registry Tasks
+
+### Task 1: Create an Azure Container Registry resource
 
 1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
+
+    ![](./media/lab5-12-1.png)
+
+    ![](./media/lab5-12-2.png)
+
+1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
+   
+    ![](./media/lab5-12-3.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
-1. Create a resource group for the resources needed for this exercise. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed. If you already have a resource group you want to use, proceed to the next step.
-
-    ```
-    az group create --location eastus --name myResourceGroup
-    ```
-
-1. Run the following command to create a basic container registry. The registry name must be unique within Azure, and contain 5-50 numeric and lowercase characters. Replace **myResourceGroup** with the name you used earlier, and **myContainerRegistry** with a unique value.
+1. Run the following command to create a basic container registry. The registry name must be unique within Azure, and contain 5-50 numeric and lowercase characters. 
 
     ```bash
-    az acr create --resource-group myResourceGroup \
-        --name myContainerRegistry --sku Basic
+    az acr create --resource-group ConfidentialStack-<inject key="DeploymentID" enableCopy="false"/> \
+        --name mycontainerregistry<inject key="DeploymentID" enableCopy="false"/> --sku Basic
     ```
 
-    > **Note:** The command creates a *Basic* registry, a cost-optimized option for developers learning about Azure Container Registry.
+     ![](./media/lab5-12-4.png)
 
-## Build and push an image from a Dockerfile
+     > **Note:** The command creates a *Basic* registry, a cost-optimized option for developers learning about Azure Container Registry.
+
+### Task 2: Build and push an image from a Dockerfile
 
 Next, you build and push an image based on a Dockerfile.
 
@@ -51,15 +53,17 @@ Next, you build and push an image based on a Dockerfile.
     echo FROM mcr.microsoft.com/hello-world > Dockerfile
     ```
 
-1. Run the following **az acr build** command, which builds the image and, after the image is successfully built, pushes it to your registry. Replace **myContainerRegistry** with the name you created earlier.
+1. Run the following **az acr build** command, which builds the image and, after the image is successfully built, pushes it to your registry.
 
     ```bash
     az acr build --image sample/hello-world:v1  \
-        --registry myContainerRegistry \
+        --registry mycontainerregistry<inject key="DeploymentID" enableCopy="false"/> \
         --file Dockerfile .
     ```
 
-    Following is a shortened sample of the output from the previous command showing the last few lines with the final results. You can see in the *repository* field the *sample/hello-word* image is listed.
+    ![](./media/lab5-12-5.png)
+
+ 1. Following is a shortened sample of the output from the previous command showing the last few lines with the final results. You can see in the *repository* field the *sample/hello-word* image is listed.
 
     ```
     - image:
@@ -78,12 +82,14 @@ Next, you build and push an image based on a Dockerfile.
     Run ID: cf1 was successful after 11s
     ```
 
-## Verify the results
+    ![](./media/lab5-12-6.png)
 
-1. Run the following command to list the repositories in your registry. Replace **myContainerRegistry** with the name you created earlier.
+### Task 3: Verify the results
+
+1. Run the following command to list the repositories in your registry.
 
     ```bash
-    az acr repository list --name myContainerRegistry --output table
+    az acr repository list --name mycontainerregistry<inject key="DeploymentID" enableCopy="false"/> --output table
     ```
 
     Output:
@@ -94,10 +100,12 @@ Next, you build and push an image based on a Dockerfile.
     sample/hello-world
     ```
 
-1. Run the following command to list the tags on the **sample/hello-world** repository. Replace **myContainerRegistry** with the name you used earlier.
+    ![](./media/lab5-12-7.png)
+
+1. Run the following command to list the tags on the **sample/hello-world** repository.
 
     ```bash
-    az acr repository show-tags --name myContainerRegistry \
+    az acr repository show-tags --name mycontainerregistry<inject key="DeploymentID" enableCopy="false"/> \
         --repository sample/hello-world --output table
     ```
 
@@ -109,12 +117,14 @@ Next, you build and push an image based on a Dockerfile.
     v1
     ```
 
-## Run the image in the ACR
+    ![](./media/lab5-12-8.png)
 
-1. Run the *sample/hello-world:v1* container image from your container registry with the **az acr run** command. The following example uses **$Registry** to specify the registry where you run the command. Replace **myContainerRegistry** with the name you used earlier.
+### Task 4: Run the image in the ACR
+
+1. Run the *sample/hello-world:v1* container image from your container registry with the **az acr run** command. The following example uses **$Registry** to specify the registry where you run the command. 
 
     ```bash
-    az acr run --registry myContainerRegistry \
+    az acr run --registry mycontainerregistry<inject key="DeploymentID" enableCopy="false"/> \
         --cmd '$Registry/sample/hello-world:v1' /dev/null
     ```
 
@@ -147,13 +157,4 @@ Next, you build and push an image based on a Dockerfile.
     Run ID: cab was successful after 6s
     ```
 
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
+    ![](./media/lab5-12-9.png)

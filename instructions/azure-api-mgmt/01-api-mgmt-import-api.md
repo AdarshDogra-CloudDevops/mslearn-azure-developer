@@ -83,8 +83,8 @@ In this section of the exercise, you create a resource group and an Azure Storag
 # Exercise 3: Test the API
 
 1. Select **Test (1)**.
-2. Select **Finds Pets by status (2)**.
-3. Select **Send (3)**. Response should be **200 OK (4)**.
+2. Search for **Finds Pets by status (2)** under **Search Operations** and select **Finds Pets by status (3)**.
+3. Select **Send (4)**. Response should be **200 OK (5)**.
 
 ![](./media/A11.png)
 

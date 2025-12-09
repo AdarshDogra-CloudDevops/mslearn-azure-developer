@@ -1,11 +1,23 @@
 ### Exercise 2: Retrieve user profile information with the Microsoft Graph SDK
 
+## Lab Scenario
+
 In this exercise, you create a .NET app to authenticate with Microsoft Entra ID and request an access token, then call the Microsoft Graph API to retrieve and display your user profile information. You learn how to configure permissions and interact with Microsoft Graph from your application.
 
+## Lab Objectives
+In this lab, you will perform:
+
+- Task 1: Register a new application
+- Task 2: Create a .NET console app to send and receive messages
+- Task 3: Configure the console application
+- Task 4: Add the starter code for the project
+- Task 5: Run the application
+
+## Estimated Timing: 15 Minutes
 
 ### Task 1: Register a new application
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+In this task, you will register a new application in Microsoft Entra ID and record the identifiers required for accessing Microsoft Graph.
 
 1. In the portal, search for **App registrations (1)** and select **App registrations (2)**. 
 
@@ -29,13 +41,13 @@ In this exercise, you create a .NET app to authenticate with Microsoft Entra ID 
  
 ### Task 2: Create a .NET console app to send and receive messages
 
-Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in your local environment.
+In this task, you will set up the .NET console project and prepare the development environment for building the Microsoft Graph application.
 
-1. Open **File Explorer**, navigate to the **Downloads** folder, and create a new folder named **graphapp** for the project.
+1. In Lab VM, open **File Explorer**, navigate to the **Downloads** folder, and create a new folder named **graphapp** for the project.
 
      ![](./media/lab2-e2-3.png)
 
-1. In Lab VM open the Start menu, search for **Visual Studio Code (1)**, and select **Visual Studio Code (2)** to launch the application.
+1. In Lab VM type **Visual Studio Code (1)** in the search bar and select **Visual Studio Code (2)** from the results to open.
 
      ![](./media/lab2-12-6.png)
 
@@ -69,9 +81,9 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 ### Task 3: Configure the console application
 
-In this section you create, and edit, a **.env** file to hold the secrets you recorded earlier. 
+In this task, you will create and configure the .env file to store the application settings needed for authentication.
 
-1. Select **New file...** and create a file named *.env* in the project folder.
+1. Select **New file...** and create a file named **.env** in the project folder.
 
      ![](./media/lab2-e2-6.png)
 
@@ -87,6 +99,8 @@ In this section you create, and edit, a **.env** file to hold the secrets you re
 1. Press **ctrl+s** to save the file.
 
 ### Task 4: Add the starter code for the project
+
+In this task, you will add the starter code and implement the authentication and Microsoft Graph client configuration required to retrieve user profile data.
 
 1. Open the *Program.cs* file **(1)** and replace any existing contents with the following code **(2)**. Be sure to review the comments in the code.
 
@@ -178,7 +192,7 @@ In this section you create, and edit, a **.env** file to hold the secrets you re
 
 ### Task 5: Run the application
 
-Now that the app is complete it's time to run it. 
+In this task, you will run the application, complete the interactive authentication flow, and view your user profile information retrieved from Microsoft Graph.
 
 1. Start the application by running the following command:
 
@@ -186,7 +200,7 @@ Now that the app is complete it's time to run it.
     dotnet run
     ```
 
-1. The app opens the default browser prompting you to select the account you want to authenticate with. 
+1. The app opens the default browser and displays the **Pick an account** prompt. Select your **ODL_User** account to continue with authentication.
 
      ![](./media/lab2-12-20.png)
 
@@ -206,3 +220,17 @@ Now that the app is complete it's time to run it.
     ![](./media/lab2-e2-12.png)
 
 1. Start the application a second time and notice you no longer receive the **Permissions requested** notification. The permission you granted earlier was cached.
+
+## Summary
+
+In this lab, you:
+
+- Registered an application in Microsoft Entra ID for Microsoft Graph access
+
+- Created and configured a .NET console project
+
+- Added environment variables and implemented authentication using the Microsoft Graph SDK
+
+- Retrieved and displayed your user profile information through the Microsoft Graph API
+
+## You have successfully completed the lab.

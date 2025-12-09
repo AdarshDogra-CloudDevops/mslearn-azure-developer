@@ -7,10 +7,11 @@ In this exercise, you register an application in Microsoft Entra ID and build a 
 ## Lab Objectives
 In this lab, you will perform:
 
-- Register a new application
-- Create a .NET console app to acquire a token
-- Configure backend settings
-- Test the API
+- Task 1: Register a new application
+- Task 2: Create a .NET console app to acquire a token
+- Task 3: Configure the console application
+- Task 4: Add the starter code for the project
+- Task 5: Run the application
 
 ## Estimated Timing: 20 Minutes
 
@@ -18,7 +19,19 @@ In this lab, you will perform:
 
 ### Task 1: Register a new application
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+In this task, you will create a new app registration in Microsoft Entra ID and record the IDs needed for authentication.
+
+1. In the lab VM, click on the **Azure Portal icon** as shown below:
+
+    ![](./media/lab2-12-0.png)
+
+    - On the **Sign in to Microsoft Azure** tab, you will see the login screen. Enter your credentials:
+      
+        * **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+    
+    - Next, provide your password:
+
+        * **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
 
 1. In the portal, search for **App registrations (1)** and select **App registrations (2)**. 
 
@@ -44,13 +57,13 @@ In this lab, you will perform:
  
 ### Task 2: Create a .NET console app to acquire a token
 
-Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in your local environment.
+In this task, you will set up the .NET console project and prepare the development environment for building the authentication application.
 
-1. Open **File Explorer**, navigate to the **Downloads** folder, and create a new folder named **authapp** for the project.
+1. In Lab VM, open **File Explorer**, navigate to the **Downloads** folder, and create a new folder named **authapp** for the project.
 
      ![](./media/lab2-12-5.png)
 
-1. In Lab VM open the Start menu, search for **Visual Studio Code (1)**, and select **Visual Studio Code (2)** to launch the application.
+1. In Lab VM type **Visual Studio Code (1)** in the search bar and select **Visual Studio Code (2)** from the results to open.
 
      ![](./media/lab2-12-6.png)
 
@@ -66,7 +79,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 1. In Visual Studio Code, open the **Extensions (1)** view, search for **C# Dev Kit (2)**, select it **C# Dev Kit (3)** from the results, and choose **Install (4)**.
 
-     ![](./media/extension.png)
+     ![](./media/vs-extension.png)
 
 1. In Visual Studio Code, on the top menu, select **View (1) > Terminal (2)** to open a new terminal window.
 
@@ -87,9 +100,9 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 ### Task 3: Configure the console application
 
-In this section you create, and edit, a **.env** file to hold the secrets you recorded earlier. 
+In this task, you will create and configure the .env file to store the application settings required for authentication. 
 
-1. Select **New file...** and create a file named *.env* in the project folder.
+1. Select **New file...** and create a file named **.env** in the project folder.
 
      ![](./media/lab2-12--11.png)
 
@@ -106,7 +119,9 @@ In this section you create, and edit, a **.env** file to hold the secrets you re
 
 ### Task 4: Add the starter code for the project
 
-1. Open the *Program.cs* **(1)** file and replace any existing contents with the following code **(2)**. Be sure to review the comments in the code.
+In this task, you will add the starter code to the console application and prepare the structure needed to implement MSAL.NET authentication.
+
+1. Open the **Program.cs (1)** file and replace any existing contents with the following code **(2)**. Be sure to review the comments in the code.
 
     ```csharp
     using Microsoft.Identity.Client;
@@ -179,7 +194,7 @@ In this section you create, and edit, a **.env** file to hold the secrets you re
 
 ### Task 5: Run the application
 
-Now that the app is complete it's time to run it. 
+In this task, you will run the console application to authenticate interactively and verify that the access token is retrieved successfully.
 
 1. Start the application by running the following command:
 
@@ -187,7 +202,7 @@ Now that the app is complete it's time to run it.
     dotnet run
     ```
 
-1. The app opens the default browser prompting you to select the account you want to authenticate with.
+1. The app opens the default browser and displays the **Pick an account** prompt. Select your **ODL_User** account to continue with authentication.
 
     ![](./media/lab2-12-20.png)
 
@@ -206,3 +221,20 @@ Now that the app is complete it's time to run it.
 
 1. Start the application a second time and notice you no longer receive the **Permissions requested** notification. The permission you granted earlier was cached.
 
+## Summary
+
+In this lab, you:
+
+- Registered an application in Microsoft Entra ID
+
+- Created and configured a .NET console project in Visual Studio Code
+
+- Added authentication settings and environment variables
+
+- Implemented MSAL.NET logic to acquire an access token
+
+- Ran the application and completed an interactive authentication flow
+
+## You have successfully completed the lab. Click on Next >>
+
+![](./media/next.png)

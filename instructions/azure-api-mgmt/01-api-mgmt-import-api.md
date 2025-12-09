@@ -88,7 +88,7 @@ In this section of the exercise, you create a resource group and an Azure Storag
 
 ![](./media/A11.png)
 
-    > **Note:** Modify **status** parameter to test different outputs.
+> **Note:** Modify **status** parameter to test different outputs.
 
 ---
 # Summary

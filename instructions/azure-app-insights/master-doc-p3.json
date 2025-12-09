@@ -2,10 +2,10 @@
     {
         "Name": "Module-03 Monitor an application with autoinstrumentation",
         "Language": "English",
-        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/main/instructions/azure-app-insights",
+        "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-app-insights",
         "Files": [
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/main/instructions/azure-app-insights/01-app-insights-auto-instrument.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-insights/01-app-insights-auto-instrument.md",
                 "Order": 1
             }
         ]

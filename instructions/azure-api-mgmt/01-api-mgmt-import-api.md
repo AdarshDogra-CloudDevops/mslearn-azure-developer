@@ -32,7 +32,7 @@ In this section of the exercise, you create a resource group and an Azure Storag
     | -- | -- |
     | `myApiName` | **myApi-<inject key="DeploymentID" enableCopy="false"/>** |
     | `myLocation`|  **<inject key="Region" enableCopy="false"/>** |
-    | `myEmail` | **<inject key="AzureAdUserEmail" enableCopy="false"/>** |
+    | `myEmail` | **odl_user_<inject key="DeploymentID" enableCopy="false"/>@cloudlabsai.com** |
     |`myResourceGroup` | **ApiService-<inject key="DeploymentID" enableCopy="false"/>** |
 
     ```bash

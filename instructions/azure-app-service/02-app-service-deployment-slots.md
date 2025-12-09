@@ -1,127 +1,119 @@
----
-lab:
-    topic: Azure App Service
-    title: 'Swap deployment slots in Azure App Service'
-    description: 'Learn how to swap deployment slots in Azure App Service. In this exercise you: deploy a simple app to App Service; make a small change to the app and deploy that to a staging slot; and finally swap the slots so the updated app is in production.'
----
+# Lab 04: Module 2: Swap Deployment Slots in Azure App Service
 
-# Swap deployment slots in Azure App Service
+## Lab Scenario
 
 In this exercise, you deploy a static HTML website to Azure App Service, create a staging deployment slot, make changes to the code and deploy them to the staging slot, and then swap the staging and production slots to promote the changes to production. You learn how to use deployment slots for safe application updates and blue-green deployments.
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
-* Download and deploy the sample app to Azure App Service.
-* Create a staging deployment slot.
-* Make a change to the sample app and deploy it to the staging slot.
-* Swap the staging and default production slots to move the changes to the production slot.
+- Download and deploy the sample app to Azure App Service.
+- Create a staging deployment slot.
+- Make a change to the sample app and deploy it to the staging slot.
+- Swap the staging and default production slots to move the changes to the production slot.
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated timing: 30 minutes
 
-## Download and deploy the sample app
+# Exercise 1: Download and deploy the sample app
 
-In this section you download the sample app and set variables to make the commands easier to enter, and then create an Azure App Service resource and deploy a static HTML site using Azure CLI commands.
+In this section you download the sample app, set variables to simplify commands, create an Azure App Service resource, and deploy a static HTML website using Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+## Task 1: Prepare Cloud Shell and Clone Repository
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. Navigate to the Azure portal: https://portal.azure.com  
+2. Select the **[\>_]** Cloud Shell icon → choose **Bash**.  
+3. If asked to create storage: select **No storage account required → Apply**.  
+4. From the **Settings** menu in Cloud Shell, select **Go to Classic version** (required for the code editor).  
+5. Run the following command to clone the sample app:
 
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+```bash
+git clone https://github.com/Azure-Samples/html-docs-hello-world.git
+```
 
-1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
+## Task 2: Set Variables
 
-1. Run the following **git** command to clone the sample app repository.
+```bash
+resourceGroup=rg-mywebapp
+appName=mywebapp$RANDOM
+echo $appName
+```
 
-    ```bash
-    git clone https://github.com/Azure-Samples/html-docs-hello-world.git
-    ```
+## Task 3: Deploy to App Service Using `az webapp up`
 
-1. Set variables to hold the resource group and app names by running the following commands. You can replace the **rg-mywebapp** value for **resourceGroup** if you have a resource group you want to use. Make note of the value of the **appName** that is displayed after the commands run, you'll need it later in this exercise.
+```bash
+cd html-docs-hello-world
+az webapp up -g $resourceGroup -n $appName --sku P0V3 --html
+```
 
-    ```bash
-    resourceGroup=rg-mywebapp
+After deployment completes:
 
-    appName=mywebapp$RANDOM
-    echo $appName
-    ```
+1. Search for the Web App using its name in the portal.
+2. Open the app via the **Default domain** link.
 
-1. Navigate to the directory that contains the sample code and run the **az webapp up** command. **Note:** This command might take a few minutes to run.
+---
 
-    ```bash
-    cd html-docs-hello-world
+# Exercise 2: Deploy Updated Code to a Deployment Slot
 
-    az webapp up -g $resourceGroup -n $appName --sku P0V3 --html
-    ```
+## Task 1: Create the Staging Slot
 
-    Now that your deployment has finished it's time to view the web app.
+```bash
+az webapp deployment slot create -n $appName -g $resourceGroup --slot staging
+```
 
-1. In the Azure portal navigate to the web app you deployed. You can enter the name you noted earlier in the **Search resources, services, and docs (G + /)** search bar, and select the resource from the list.
+View the newly created slot:
 
-1. Select the link to your web app located in the **Default domain** field in the **Essentials** section. The link will open the site in a new tab.
+- Portal → Web App → **Deployment slots**
 
-## Deploy updated code to a deployment slot
+## Task 2: Modify Code and Deploy to Staging
 
-In this section you create a deployment slot, modify the HTML in the app, and deploy the updated code to the new deployment slot.
+1. Open the HTML file:
 
-### Create a deployment slot 
+```bash
+code index.html
+```
 
-1. Return to the tab with the Azure portal and cloud shell.
+2. Change:
 
-1. Enter the following command in the cloud shell to create a deployment slot named *staging*.
+`Azure App Service - Sample Static HTML Site`  
+to  
+`Azure App Service Staging Slot`
 
-    ```bash
-    az webapp deployment slot create -n $appName -g $resourceGroup --slot staging
-    ```
+3. Save (**Ctrl+S**) and exit (**Ctrl+Q**).
 
-1. Wait for the command to finish, and then select **Deployment > Deployment slots** in the left menu to view the deployment slots for your web app. Note the name of the new slot contains *-staging* appended to name of your web app
+4. Create a ZIP package:
 
-### Update code and deploy to the staging slot
+```bash
+zip -r stagingcode.zip .
+```
 
-1. In the cloud shell, type **code index.html** to open the editor. Locate the **\<h1\>** heading tag, and change *Azure App Service - Sample Static HTML Site* to *Azure App Service Staging Slot* - or to anything else that you'd like.
+5. Deploy to staging:
 
-1. Use the commands **ctrl-s** to save, and **ctrl-q** to exit.
+```bash
+az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --slot staging
+```
 
-1. In the cloud shell run the following command to create a zip file of the updated project. A zip,  or a web application resource (WAR), file is needed for the next step.
+6. Open the staging slot:
 
-    ```bash
-    zip -r stagingcode.zip .
-    ```
+Portal → **Deployment slots** → Select **staging** → Open **Default domain** link.
 
-1. Run the following command in the cloud shell to deploy your updates to the staging slot.
+---
 
-    ```bash
-    az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --slot staging
-    ```
+# Exercise 3: Swap the Staging and Production Slots
 
-1. Select **Deployment > Deployment slots** in the left menu of your web app, and then select the staging slot you created earlier.
+1. In the Azure portal, select **Swap** from the toolbar.  
+2. Source = **staging**  
+3. Target = **production**  
+4. Select **Start Swap**  
+5. Track progress via the Notifications panel.  
+6. Open the production site and verify the updated heading. Refresh if needed.
 
-1. Select the link in the **Default domain** field in the **Essentials** section. The link will open the web site for the staging slot in a new tab.
+---
 
-## Swap the staging and production slots
+# Summary
 
-You can perform a swap in the Azure portal with the **Swap** option in the toolbar. The **Swap** option will appear in the toolbar if you select **Overview** or **Deployment > Deployment slots** in the left menu of your web app.
+In this lab, you:
 
-1. In the Azure portal, select **Swap** in the toolbar to open the **Swap** panel.
+- Deployed a static HTML website to Azure App Service.
+- Created and deployed changes to a staging slot.
+- Performed a slot swap to safely promote changes to production.
 
-1. Review the settings in the swap panel. The **Source** should show the **-staging** slot, and the **Target** should show the default production slot.
-
-    ![Screenshot of the Swap panel.](./media/02/app-service-swap-panel.png)
-
-1. Select **Start Swap** and wait for the operation to complete. You can track completion in the **Notifications** panel that you can open by selecting the bell icon at the top of the portal.
-
-1. To verify the swap navigate to the web app you deployed. Enter the web app name you created earlier (for example, *mywebapp12360*) in the **Search resources, services, and docs (G + /)** search bar, and then select the resource from the list.
-
-1. Select the link to your web app located in the **Default domain** field in the **Essentials** section. The link will open the site (production slot) in a new tab.
-
-1. Verify your changes, you may need to refresh the page for them to appear.
-
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.

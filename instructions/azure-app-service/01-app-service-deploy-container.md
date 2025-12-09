@@ -1,74 +1,88 @@
----
-lab:
-    topic: Azure App Service
-    title: 'Deploy a containerized app to Azure App Service'
-    description: 'Learn how to deploy a containerized app to Azure App Service.'
----
+# Lab 04: Module 1: Deploy a Containerized App to Azure App Service
 
-# Deploy a containerized app to Azure App Service
+## Lab Scenario
 
 In this exercise, you create an Azure App Service web app configured to run a containerized application by specifying a container image from Microsoft Container Registry. You learn how to configure container settings, deploy the app, and verify that the containerized application is running successfully in Azure App Service.
 
-Tasks performed in this exercise:
+## Lab Objectives
 
-* Create an Azure App Service resource and deploy a containerized app
-* View the results
-* Clean up resources
+In this lab, you will perform:
 
-This exercise takes approximately **15** minutes to complete.
+- Create an Azure App Service resource and deploy a containerized app
+- View the results
 
-## Create a web app resource
+## Estimated timing: 15 minutes
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Select the **+ Create a resource** located in the **Azure Services** heading near the top of the homepage. 
-1. In the **Search the Marketplace** search bar, enter *web app* and press **enter** to start searching.
-1. In the Web App tile, select the **Create** drop-down and then select **Web App**.
+# Exercise 1: Create a web app resource
+
+## Task 1: Create the Web App
+
+1. In your browser navigate to the Azure portal https://portal.azure.com; sign in with your Azure credentials if prompted.
+2. Select the **+ Create a resource** located in the **Azure Services** heading near the top of the homepage. 
+3. In the **Search the Marketplace** search bar, enter *web app* and press **Enter** to start searching.
+4. In the Web App tile, select the **Create** drop-down and then select **Web App**.
 
     ![Screenshot of the Web App tile.](./media/01/create-web-app-tile.png)
 
-    Selecting **Create** will open a template with a few tabs to fill out with information about your deployment. The following steps walk you through what changes to make in the relevant tabs.
-
-1. Fill out the **Basics** tab with the information in the following table:
+5. Fill out the **Basics** tab with the information in the following table:
 
     | Setting | Action |
-    |--|--|
+    |--------|--------|
     | **Subscription** | Retain the default value. |
-    | **Resource group** | Select Create new, enter `rg-WebApp`, and then select OK. You can also select an existing resource group if you prefer. |
-    | **Name** | Enter a unique name, for example **your-initials-containerwebapp**. Replace *your-initials* with your initials, or some other value. The name needs to be unique, so it may require a few changes. |
-    | Slider under **Name** setting | Select the slider to turn it off. This slider only appears in some Azure configurations. |
-    | **Publish** | Select the **Container** option. |
+    | **Resource group** | Select **Create new**, enter `rg-WebApp`, and then select OK. You may also select an existing resource group. |
+    | **Name** | Enter a unique name, for example **your-initials-containerwebapp**. Replace *your-initials* with your initials or another value. The name must be globally unique. |
+    | **Slider under Name** | Select the slider to turn it off (if visible). |
+    | **Publish** | Select **Container**. |
     | **Operating System** | Ensure **Linux** is selected. |
     | **Region** | Retain the default selection, or choose a region near you. |
-    | **Linux Plan** | Retain the default selection. |
-    | **Pricing plan** | Select the drop-down and choose the **Free F1** plan. |
+    | **Linux Plan** | Retain the default value. |
+    | **Pricing plan** | Select the drop-down and choose **Free F1**. |
 
-1. Select, or navigate to, the **Container** tab, and enter the information in the following table:
+---
 
-    | Setting | Action |
-    |--|--|
-    | **Sidecar support** | Slider should be set to the **off** position. |
-    | **Image Source** | Select **Other container registries**. |
-    | **Access Type** | Retain default **Public** selection. |
-    | **Registry server URL** | Enter `mcr.microsoft.com/k8se`. |
-    | **Image and Tag** | Enter `quickstart:latest`. |
-    | **Startup Command** | Leave blank. |
+## Task 2: Configure the Container Settings
 
-1. Select the **Review + create** tab.
-1. Review the selections you made, and then select the **Create** button.
+Navigate to the **Container** tab and enter the following details:
 
-It may take a few minutes for the deployment to complete. When it is finished select the **Go to resource** button.
+| Setting | Action |
+|--------|--------|
+| **Sidecar support** | Off |
+| **Image Source** | Other container registries |
+| **Access Type** | Public |
+| **Registry server URL** | `mcr.microsoft.com/k8se` |
+| **Image and Tag** | `quickstart:latest` |
+| **Startup Command** | Leave blank |
 
-Now that your deployment has finished it's time to view the web app. Select the link to your web app located next to the **Default domain** field in the **Essentials** section. The link will open the site in a new tab.
+---
 
->**Note:** It may take a few minutes for the deployed container app to run and display in the new tab.
+## Task 3: Review and Create
 
-## Clean up resources
+1. Select the **Review + create** tab.  
+2. Review your selections.  
+3. Select **Create** to deploy the web app.  
+4. Wait until deployment completes and select **Go to resource**.
 
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
+---
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
+## Task 4: View the Web App
 
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
+1. In the **Essentials** section of the App Service overview page, select the link next to **Default domain**.  
+2. A new browser tab will open showing your deployed containerized app.
+
+> **Note:** It may take a few minutes for the container to fully load.
+
+---
+
+# Exercise Review
+
+In this exercise, you created a Linux-based Azure App Service Web App, configured it to use a public container image from Microsoft Container Registry, deployed the application, and verified it is running successfully in a browser.
+
+---
+
+# Summary
+
+In this lab, you completed the following tasks:
+
+- Created an Azure App Service configured for container deployment  
+- Configured the container settings using an image from Microsoft Container Registry  
+- Deployed and validated the containerized application  

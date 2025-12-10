@@ -16,7 +16,7 @@ In this lab, you will perform:
 
 ### Task 1: Create an Azure Cosmos DB account
 
-1. Open **Cloud Shell** → choose **Bash** → select **No storage account required**.
+1. Open **Cloud Shell**, choose **Bash**, select **No storage account required (1)**, choose the available **Subscription (2)**, and then click **Apply (3)** to continue.
 
     ![](./media/A01.png)
 
@@ -253,13 +253,29 @@ Sample output:
 
 ![](./media/E5.png)
 
-Go to **Azure Portal → Cosmos DB → Data Explorer → myDatabase → myContainer → Items**  
-You will see:
+### Verify the item in Azure Cosmos DB
 
-![](./media/E6.png)
+1. Go to **Azure Portal** and open the Resource Group **CosmosDB-<inject key="DeploymentID" enableCopy="false"/> (1)**.
 
-![Screenshot showing the location of Items in the Data Explorer.](./media/E7.png)
+![](./media/E10.png)
+
+2. In the resource group, select the **Azure Cosmos DB account** that was created **(2)**.
+
+![](./media/E11.png)
+
+3. Open **Data Explorer (3)**.
+
+![](./media/E12.png)
+
+4. Under **myDatabase (4)**, expand the dropdown, select **myContainer (5)**, then open **Items (6)** — you will see the created result **(7)**.
+
+![](./media/E13.png)
 
 ---
+## Summary
+You successfully:
+- Created a Cosmos DB account  
+- Built a .NET application that interacts with Cosmos DB  
+- Inserted and validated data programmatically  
 
 ## You have successfully completed this lab.

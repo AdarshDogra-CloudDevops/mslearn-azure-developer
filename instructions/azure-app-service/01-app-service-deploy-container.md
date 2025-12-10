@@ -17,12 +17,14 @@ In this lab, you will perform:
 
 ## Task 1: Create the Web App
 
-1. In your browser navigate to the Azure portal https://portal.azure.com; sign in with your Azure credentials if prompted.
-2. Select the **+ Create a resource** located in the **Azure Services** heading near the top of the homepage. 
+1. Select the **+ Create a resource** located in the **Azure Services** heading near the top of the homepage. 
+
+![](./media/01/A01.png)
+
 3. In the **Search the Marketplace** search bar, enter *web app* and press **Enter** to start searching.
 4. In the Web App tile, select the **Create** drop-down and then select **Web App**.
 
-    ![Screenshot of the Web App tile.](./media/01/create-web-app-tile.png)
+    ![Screenshot of the Web App tile.](./media/01/C2.png)
 
 5. Fill out the **Basics** tab with the information in the following table:
 
@@ -40,6 +42,8 @@ In this lab, you will perform:
 
 ---
 
+![](./media/01/D1.png)
+
 ## Task 2: Configure the Container Settings
 
 Navigate to the **Container** tab and enter the following details:
@@ -54,20 +58,32 @@ Navigate to the **Container** tab and enter the following details:
 | **Startup Command** | Leave blank |
 
 ---
+![](./media/01/D2.png)
+
 
 ## Task 3: Review and Create
 
 1. Select the **Review + create** tab.  
 2. Review your selections.  
 3. Select **Create** to deploy the web app.  
+
+![](./media/01/D3.png)
+
 4. Wait until deployment completes and select **Go to resource**.
+
+![](./media/01/dep01.png)
 
 ---
 
 ## Task 4: View the Web App
 
-1. In the **Essentials** section of the App Service overview page, select the link next to **Default domain**.  
+1. In the App Service overview page, select the link next to **Default domain**.  
+
+![](./media/01/D09.png)
+
 2. A new browser tab will open showing your deployed containerized app.
+
+![](./media/01/D100.png)
 
 > **Note:** It may take a few minutes for the container to fully load.
 

@@ -20,23 +20,33 @@ In this section you download the sample app, set variables to simplify commands,
 
 ## Task 1: Prepare Cloud Shell and Clone Repository
 
-1. Navigate to the Azure portal: https://portal.azure.com  
-2. Select the **[\>_]** Cloud Shell icon → choose **Bash**.  
-3. If asked to create storage: select **No storage account required → Apply**.  
-4. From the **Settings** menu in Cloud Shell, select **Go to Classic version** (required for the code editor).  
+1. Open **Cloud Shell**, choose **Bash**, select **No storage account required (1)**, choose the available **Subscription (2)**, and then click **Apply (3)** to continue.
+
+    ![](./media/02/A001.png)
+
+    ![](./media/02/A02.png)
+
+    ![](./media/02/A03.png)
+
+2. Switch to **Classic version** in Cloud Shell.  
+
+    ![](./media/02/E9.png)
+
 5. Run the following command to clone the sample app:
 
-```bash
-git clone https://github.com/Azure-Samples/html-docs-hello-world.git
-```
+    ```bash
+    git clone https://github.com/Azure-Samples/html-docs-hello-world.git
+    ```
 
 ## Task 2: Set Variables
 
-```bash
-resourceGroup=rg-mywebapp
-appName=mywebapp$RANDOM
-echo $appName
-```
+    ```bash
+    resourceGroup=rg-mywebapp
+    appName=mywebapp$RANDOM
+    echo $appName
+    ```
+
+![](./media/02/D5.png)
 
 ## Task 3: Deploy to App Service Using `az webapp up`
 
@@ -47,8 +57,14 @@ az webapp up -g $resourceGroup -n $appName --sku P0V3 --html
 
 After deployment completes:
 
-1. Search for the Web App using its name in the portal.
+1. Search for the **mywebapp** using its name in the portal.
+
+![](./media/02/D06.png)
+
 2. Open the app via the **Default domain** link.
+
+    ![](./media/02/dep01.png)
+
 
 ---
 
@@ -62,21 +78,23 @@ az webapp deployment slot create -n $appName -g $resourceGroup --slot staging
 
 View the newly created slot:
 
-- Portal → Web App → **Deployment slots**
+- - In the Azure portal, open your **Web App**, then select **Deployment slots** from the left panel.
+
+
 
 ## Task 2: Modify Code and Deploy to Staging
 
-1. Open the HTML file:
+1. Navigate back to CL and Open the HTML file by running the below code :
 
-```bash
-code index.html
-```
+    ```bash
+    code index.html
+    ```
 
 2. Change:
 
-`Azure App Service - Sample Static HTML Site`  
-to  
-`Azure App Service Staging Slot`
+    `Azure App Service - Sample Static HTML Site`  
+    to  
+    `Azure App Service Staging Slot`
 
 3. Save (**Ctrl+S**) and exit (**Ctrl+Q**).
 
@@ -94,18 +112,26 @@ az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --sl
 
 6. Open the staging slot:
 
-Portal → **Deployment slots** → Select **staging** → Open **Default domain** link.
+- In the Azure portal, go to **Deployment slots**, select **staging**, and open the **Default domain** link.
 
 ---
 
 # Exercise 3: Swap the Staging and Production Slots
 
-1. In the Azure portal, select **Swap** from the toolbar.  
-2. Source = **staging**  
-3. Target = **production**  
-4. Select **Start Swap**  
-5. Track progress via the Notifications panel.  
-6. Open the production site and verify the updated heading. Refresh if needed.
+1. Select your **Web App**, then in the left panel open the **Deployment (1)** dropdown, go to **Deployment slots (2)**, and select **Swap (3)**. 
+
+![](./media/02/D07.png)
+
+2. Set **Source** to **staging (1)**.  
+3. Set **Target** to **production (2)**.  
+4. Select **Start Swap (3)** to begin the process.  
+5. Monitor the swap progress in the **Notifications** panel.  
+
+![](./media/02/D08.png)
+
+6. Open the production site and verify that the updated heading appears (refresh the page if needed).
+
+![](./media/02/D100.png)
 
 ---
 
@@ -117,3 +143,4 @@ In this lab, you:
 - Created and deployed changes to a staging slot.
 - Performed a slot swap to safely promote changes to production.
 
+## You have successfully completed this lab.

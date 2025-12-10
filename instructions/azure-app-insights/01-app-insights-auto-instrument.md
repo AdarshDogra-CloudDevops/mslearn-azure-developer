@@ -30,8 +30,8 @@ In this lab, you will perform:
 | Setting | Action |
 |--|--|
 | **Subscription** | Retain the default value. |
-| **Resource group** | Choose an existing resource group.  |
-| **Name** | Enter a unique name `webapp-<inject key="DeploymentID" enableCopy="false"/>`.|
+| **Resource group** | Choose an existing resource group (MonitoredAssets-<inject key="DeploymentID" enableCopy="false"/>).  |
+| **Name** | Enter a unique name webapp-<inject key="DeploymentID" enableCopy="false"/>.|
 | Slider under **Name** | Turn it off (if visible). |
 | **Publish** | Select **Code**. |
 | **Runtime stack** | Select **.NET 8 (LTS)**. |

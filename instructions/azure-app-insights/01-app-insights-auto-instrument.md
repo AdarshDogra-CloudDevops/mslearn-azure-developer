@@ -18,12 +18,12 @@ In this lab, you will perform:
 
 1. Select **+ Create a resource** located under the **Azure Services** heading on the homepage.
 
-
+   ![](./media/C1.png)
 
 2. In the **Search the Marketplace** bar, enter **web app** and press **Enter**.
 3. In the Web App tile, select the **Create** dropdown and then select **Web App**.
 
-![](./media/create-web-app-tile.png)
+   ![](./media/C2.png)
 
 5. On the **Basics** tab, configure the following settings:
 
@@ -38,9 +38,9 @@ In this lab, you will perform:
 | **Operating system** | Select **Windows**. |
 | **Region** | Retain the default selection or choose a region near you. |
 | **Windows Plan** | Retain the default selection. |
-| **Pricing plan** | Select **S1**. |
+| **Pricing plan** | Select **F1**. |
 
-   > Note : If you're not able to see S1 pricing plan click on explore more pricing plan and choose S1
+   ![](./media/C3.png)
 
 6. Navigate to the **Monitor + secure** tab and configure:
 
@@ -50,11 +50,20 @@ In this lab, you will perform:
 | **Application Insights** | Select **Create new**, enter `autoinstrument-insights-<inject key="DeploymentID" enableCopy="false"/>`, and select **OK**. |
 | **Workspace** | Select **create new** Enter `Workspace-<inject key="DeploymentID" enableCopy="false"/>` if the field is not already populated and locked. |
 
+   ![](./media/C17.png)
+
+   ![](./media/C19.png)
+
    > **Note:** If the **Enable Application Insights** is disabled use diffent regions 
        like West US, North Europe, East US, Southeast Asia.
 
 7. Select **Review + create** → Review your configuration → Select **Create**.
+
+      ![](./media/C20.png)
+
 8. After deployment completes, select **Go to resource**.
+
+    ![](./media/C4.png)
 
 ---
 
@@ -68,6 +77,8 @@ In this lab, you will perform:
 4. Select **Apply** and confirm the changes.
 5. In the left navigation menu, select **Overview**.
 
+   ![](./media/C22.png)
+
 ---
 
 # Exercise 3: Create and deploy a Blazor app
@@ -77,9 +88,18 @@ All steps in this exercise are performed in the Azure Cloud Shell.
 ### Task 1: Create the Blazor application
 
 1. Open Cloud Shell using the **[\>_]** button at the top of the Azure portal, and choose a **Bash** environment.  
+
+   ![](./media/A01.png)
+
+   ![](./media/A02.png)
+
    If prompted to choose storage, select **No storage account required**, choose your subscription, and select **Apply**.
 
+   ![](./media/A03.png)
+
 > **Note**: If Cloud Shell is currently set to **PowerShell**, switch to **Bash**.
+
+   ![](./media/C23.png)
 
 2. Run the following commands to create a folder and move into it:
 ```
@@ -112,7 +132,7 @@ cd publish
 zip -r ../app.zip .
 cd ..
 ```
-
+   ![](./media/C24.png)
 ---
 
 ### Task 3: Deploy the application to App Service
@@ -125,11 +145,94 @@ az webapp deploy --name YOUR-WEB-APP-NAME     --resource-group YOUR-RESOURCE-GRO
 
 Once deployment is complete, open the application using the **Default domain** link in the Web App **Overview** page.
 
+   ![](./media/C25.png)
+
+   ![](./media/C06.png)
+
+---
+
+<details>
+<summary>Troubleshooting Steps for Deploy the application to App Service Error</summary>
+
+# Troubleshooting Steps for Deployment Error
+
+**Note:** If you face an error in **Task 3: Deploy the application to App Service**, please follow the steps below and then run the deployment code again.
+
+## **Step 1: Identify the Error**
+
+If you receive the following message:
+
+```
+A Cloud Shell credential problem occurred.
+Audience https://appservice.azure.com is not a supported MSI token audience.
+```
+
+## **Step 2: Log out of Azure CLI**
+
+Run:
+
+```bash
+az logout
+```
+
+## **Step 3: Log in again using the correct scope**
+
+Run:
+
+```bash
+az login --scope "https://appservice.azure.com/.default"
+```
+
+This will display a device login link and a code.
+
+![](./media/C16.png)
+
+## **Step 4: Authenticate using Device Login**
+
+1. Open **https://microsoft.com/devicelogin**
+2. Enter the code provided in Cloud Shell.
+3. Select **Next**.
+
+![](./media/C15.png)
+
+## **Step 5: Select Your ODL_User Account**
+
+Select the displayed **ODL_User** account.
+
+![](./media/C14.png)
+
+## **Step 6: Approve Azure CLI Sign-in**
+
+Click **Continue** to allow Azure CLI access.
+
+![](./media/C013.png)
+
+## **Step 7: Select Subscription**
+
+When prompted:
+
+```
+Select a subscription and tenant:
+```
+
+Enter:
+
+```
+1
+```
+## **Step 8: Re-run the Deployment Command**
+
+Run:
+
+```bash
+az webapp deploy --name webapp-1993963 --resource-group MonitoredAssets-1993963 --src-path ./app.zip
+```
+</details>
 ---
 
 # Exercise 4: View metrics in Application Insights
 
-1. Return to the Application Insights resource.
+1. Return to the **Application Insights resource**.
 2. Review charts on the **Overview** tab:
    - Failed requests  
    - Server response time  
@@ -139,14 +242,25 @@ Once deployment is complete, open the application using the **Default domain** l
 ### Generate telemetry:
 
 1. Navigate through **Home**, **Counter**, and **Weather** pages in the application.
+
+   ![](./media/C12.png)
+
+   ![](./media/C11.png)
+
+   ![](./media/C10.png)
+
 2. Refresh the web page multiple times to generate request and response data.
 3. To generate errors, append `/failures` to the application URL.  
    (This route does not exist and will create failures.)  
    Refresh several times.
 
+   ![](./media/C9.png)
+
 4. Return to Application Insights and wait 1–2 minutes for telemetry to appear.
 
 5. In the left navigation menu, open **Investigate → Failures** to view detailed breakdowns.
+
+   ![](./media/C7.png)
 
 ---
 

@@ -130,31 +130,4 @@ Next, you build and push an image based on a Dockerfile.
 
     The **cmd** parameter in this example runs the container in its default configuration, but **cmd** supports other **docker run** parameters or even other **docker** commands. 
 
-    The following sample output is shortened:
-
-    ```
-    Packing source code into tar to upload...
-    Uploading archived source code from '/tmp/run_archive_ebf74da7fcb04683867b129e2ccad5e1.tar.gz'...
-    Sending context (1.855 KiB) to registry: mycontainerre...
-    Queued a run with ID: cab
-    Waiting for an agent...
-    2019/03/19 19:01:53 Using acb_vol_60e9a538-b466-475f-9565-80c5b93eaa15 as the home volume
-    2019/03/19 19:01:53 Creating Docker network: acb_default_network, driver: 'bridge'
-    2019/03/19 19:01:53 Successfully set up Docker network: acb_default_network
-    2019/03/19 19:01:53 Setting up Docker configuration...
-    2019/03/19 19:01:54 Successfully set up Docker configuration
-    2019/03/19 19:01:54 Logging in to registry: mycontainerregistry008.azurecr.io
-    2019/03/19 19:01:55 Successfully logged into mycontainerregistry008.azurecr.io
-    2019/03/19 19:01:55 Executing step ID: acb_step_0. Working directory: '', Network: 'acb_default_network'
-    2019/03/19 19:01:55 Launching container with name: acb_step_0
-    
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    
-    2019/03/19 19:01:56 Successfully executed container: acb_step_0
-    2019/03/19 19:01:56 Step ID: acb_step_0 marked as successful (elapsed time in seconds: 0.843801)
-    
-    Run ID: cab was successful after 6s
-    ```
-
     ![](./media/lab5-12-9.png)

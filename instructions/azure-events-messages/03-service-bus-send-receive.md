@@ -1,47 +1,48 @@
----
-lab:
-    topic: Azure events and messaging
-    title: 'Send and receive messages from Azure Service Bus'
-    description: 'Learn how send and messages from Azure Service Bus with the with the .NET Azure.Messaging.ServiceBus SDK.'
----
-
-# Send and receive messages from Azure Service Bus
+## Exercise 3: Send and receive messages from Azure Service Bus
 
 In this exercise, you create and configure Azure Service Bus resources, then build a .NET app to send and receive messages using the **Azure.Messaging.ServiceBus** SDK. You learn how to provision a Service Bus namespace and queue, assign permissions, and interact with messages programmatically. 
 
 Tasks performed in this exercise:
 
-* Create Azure Service Bus resources
-* Assign a role to your Microsoft Entra user name
-* Create a .NET console app to send and receive messages
-* Clean up resources
+* Task 1: Create Azure Event Hubs resources
+* Task 2: Create an Azure Service Bus namespace and queue
+* Task 3: Assign a role to your Microsoft Entra user name
+* Task 4: Create a .NET console app to send and receive messages
+* Task 5: Add the starter code for the project
+* Task 6: Add code to send messages to queue
+* Task 7: Add code to process messages in the queue
+* Task 8: Sign into Azure and run the app
 
 This exercise takes approximately **30** minutes to complete.
 
-## Create Azure Event Hubs resources
+### Task 1: Create Azure Event Hubs resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
 1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
+
+    ![](./media/lab7-12---1.png)
+
+    ![](./media/lab7-12---2.png)
+
+1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
+   
+    ![](./media/lab7-12---3.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. If you already have a resource group you want to use, proceed to the next step. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed.
+     ![](./media/lab7-12-1.1.png)
+
+1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. 
 
     ```
-    az group create --name myResourceGroup --location eastus
-    ```
-
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise. If you changed the location in the previous step, make the same change in the **location** variable.
-
-    ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    namespaceName=svcbusns$RANDOM
+    resourceGroup=PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>
+    location=<inject key="Region" enableCopy="false"/>
+    namespaceName=svcbusns<inject key="DeploymentID" enableCopy="false"/>
     ```
 
 1. You will need the name assigned to the namespace later in this exercise. Run the following command and record output.
@@ -50,7 +51,9 @@ In this section of the exercise you create the needed resources in Azure with th
     echo $namespaceName
     ```
 
-### Create an Azure Service Bus namespace and queue
+    ![](./media/lab7-e3-1.png)
+
+### Task 2: Create an Azure Service Bus namespace and queue
 
 1. Create a Service Bus messaging namespace. The following command creates a namespace using the variable you created earlier. The operation takes a few minutes to complete.
 
@@ -61,6 +64,8 @@ In this section of the exercise you create the needed resources in Azure with th
         --location $location
     ```
 
+     ![](./media/lab7-e3-2.png)
+
 1. Now that a namespace is created, you need to create a queue to hold the messages. Run the following command to create a queue named **myqueue**.
 
     ```bash
@@ -69,7 +74,9 @@ In this section of the exercise you create the needed resources in Azure with th
         --name myqueue
     ```
 
-### Assign a role to your Microsoft Entra user name
+     ![](./media/lab7-e3-3.png)
+
+### Task 3: Assign a role to your Microsoft Entra user name
 
 To allow your app to send and receive messages, assign your Microsoft Entra user to the **Azure Service Bus Data Owner** role at the Service Bus namespace level. This gives your user account permission to manage and access queues and topics using Azure RBAC. Perform the following steps in the cloud shell.
 
@@ -96,7 +103,7 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --scope $resourceID
     ```
 
-## Create a .NET console app to send and receive messages
+### Task 4: Create a .NET console app to send and receive messages
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -122,7 +129,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet add package Azure.Identity
     ```
 
-### Add the starter code for the project
+### Task 5: Add the starter code for the project
 
 1. Run the following command in the cloud shell to begin editing the application.
 
@@ -161,7 +168,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 1. Press **ctrl+s** to save your changes.
 
-### Add code to send messages to queue
+### Task 6: Add code to send messages to queue
 
 Now it's time to add code to create the Service Bus client and send a batch of messages to the queue.
 
@@ -221,7 +228,7 @@ Now it's time to add code to create the Service Bus client and send a batch of m
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
-### Add code to process messages in the queue
+### Task 7: Add code to process messages in the queue
 
 1. Locate the **// ADD CODE TO PROCESS MESSAGES FROM THE QUEUE** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -290,7 +297,7 @@ Now it's time to add code to create the Service Bus client and send a batch of m
 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+### Task 8: Sign into Azure and run the app
 
 1. In the cloud shell command-line pane, enter the following command to sign into Azure.
 
@@ -308,8 +315,6 @@ Now it's time to add code to create the Service Bus client and send a batch of m
     dotnet run
     ```
 
-    
-
 1. In the Azure portal, navigate to the Service Bus namespace you created. 
 
 1. Select **myqueue** at the bottom of the **Overview** window.
@@ -321,15 +326,3 @@ Now it's time to add code to create the Service Bus client and send a batch of m
 1. In the cloud shell, press any key to continue and the application will process the three messages. 
  
 1. Return to the portal after the application has completed processing the messages. Select **Peek from start** again and notice there are no messages in the queue.
-
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-

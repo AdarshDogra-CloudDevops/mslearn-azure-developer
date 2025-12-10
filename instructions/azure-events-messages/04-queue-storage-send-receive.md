@@ -1,47 +1,49 @@
----
-lab:
-    topic: Azure events and messaging
-    title: 'Send and receive messages from Azure Queue storage'
-    description: 'Learn how send and messages from Azure Queue storage with the with the .NET Azure.StorageQueues SDK.'
----
-
-# Send and receive messages from Azure Queue storage
+## Exercise 4: Send and receive messages from Azure Queue storage
 
 In this exercise, you create and configure Azure Queue Storage resources, then build a .NET app to send and receive messages using the **Azure.Storage.Queues** SDK. You learn how to provision storage resources, manage queue messages, and clean up your environment when finished. 
 
 Tasks performed in this exercise:
 
-* Create Azure Queue storage resources
-* Assign a role to your Microsoft Entra user name
-* Create a .NET console app to send and receive messages
-* Clean up resources
+* Task 1: Create Azure Queue storage resources
+* Task 2: Assign a role to your Microsoft Entra user name
+* Task 3: Create a .NET console app to send and receive messages
+* Task 4: Add the starter code for the project
+* Task 5: Add code to create a queue client and create a queue
+* Task 6: Add code to send and list messages in a queue
+* Task 7: Add code to update a message and list the results
+* Task 8: Add code to delete messages and the queue
+* Task 9: Sign into Azure and run the app
 
 This exercise takes approximately **30** minutes to complete.
 
-## Create Azure Queue storage resources
+### Task 1: Create Azure Queue storage resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
 1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
+
+    ![](./media/lab7-12---1.png)
+
+    ![](./media/lab7-12---2.png)
+
+1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
+   
+    ![](./media/lab7-12---3.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. If you already have a resource group you want to use, proceed to the next step. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed.
+     ![](./media/lab7-12-1.1.png)
+
+1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. 
 
     ```
-    az group create --name myResourceGroup --location eastus
-    ```
-
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise. If you changed the location in the previous step, make the same change in the **location** variable.
-
-    ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    storAcctName=storactname$RANDOM
+    resourceGroup=PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>
+    location=<inject key="Region" enableCopy="false"/>
+    storAcctName=storactname<inject key="DeploymentID" enableCopy="false"/>
     ```
 
 1. You will need the name assigned to the storage account later in this exercise. Run the following command and record output.
@@ -50,6 +52,8 @@ In this section of the exercise you create the needed resources in Azure with th
     echo $storAcctName
     ```
 
+    ![](./media/lab7-e3-15.png)
+
 1. Run the following command to create a storage account using the variable you created earlier. The operation takes a few minutes to complete.
 
     ```bash
@@ -57,7 +61,9 @@ In this section of the exercise you create the needed resources in Azure with th
         --name $storAcctName --location $location --sku Standard_LRS
     ```
 
-### Assign a role to your Microsoft Entra user name
+     ![](./media/lab7-e3-16.png)
+
+### Task 2: Assign a role to your Microsoft Entra user name
 
 To allow your app to send and receive messages, assign your Microsoft Entra user to the **Storage Queue Data Contributor** role. This gives your user account permission to create queues, and send/receive messages using Azure RBAC. Perform the following steps in the cloud shell.
 
@@ -84,7 +90,7 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --scope $resourceID
     ```
 
-## Create a .NET console app to send and receive messages
+### Task 3: Create a .NET console app to send and receive messages
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -110,7 +116,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet add package Azure.Identity
     ```
 
-### Add the starter code for the project
+### Task 4: Add the starter code for the project
 
 1. Run the following command in the cloud shell to begin editing the application.
 
@@ -152,7 +158,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 1. Press **ctrl+s** to save your changes.
 
-### Add code to create a queue client and create a queue
+### Task 5: Add code to create a queue client and create a queue
 
 Now it's time to add code to create the queue storage client and create a queue.
 
@@ -182,7 +188,7 @@ Now it's time to add code to create the queue storage client and create a queue.
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
-### Add code to send and list messages in a queue
+### Task 6: Add code to send and list messages in a queue
 
 1. Locate the **// ADD CODE TO SEND AND LIST MESSAGES** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -210,7 +216,7 @@ Now it's time to add code to create the queue storage client and create a queue.
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
-### Add code to update a message and list the results
+### Task 7: Add code to update a message and list the results
 
 1. Locate the **// ADD CODE TO UPDATE A MESSAGE AND LIST MESSAGES** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -234,7 +240,7 @@ Now it's time to add code to create the queue storage client and create a queue.
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
-### Add code to delete messages and the queue
+### Task 8: Add code to delete messages and the queue
 
 1. Locate the **// ADD CODE TO DELETE MESSAGES AND THE QUEUE** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -261,7 +267,7 @@ Now it's time to add code to create the queue storage client and create a queue.
 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+### Task 9: Sign into Azure and run the app
 
 1. In the cloud shell command-line pane, enter the following command to sign into Azure.
 
@@ -284,15 +290,4 @@ Now it's time to add code to create the queue storage client and create a queue.
 1. Expand **> Data storage** in the left navigation and select **Queues**.
 
 1. Select the queue the application creates and you can view the sent messages and monitor what the application is doing.
-
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
 

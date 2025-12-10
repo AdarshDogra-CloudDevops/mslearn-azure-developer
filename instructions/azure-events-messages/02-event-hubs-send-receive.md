@@ -1,50 +1,49 @@
----
-lab:
-    topic: Azure events and messaging
-    title: 'Send and retrieve events from Azure Event Hubs'
-    description: 'Learn how send and retrieve events from Azure Event Hubs with the .NET Azure.Messaging.EventHubs SDK.'
----
-
-# Send and retrieve events from Azure Event Hubs
+## Exercise 2: Send and retrieve events from Azure Event Hubs
 
 In this exercise, you create Azure Event Hubs resources and build a .NET console app to send and receive events using the **Azure.Messaging.EventHubs** SDK. You learn how to provision cloud resources, interact with Event Hubs, and clean up your environment when finished.
 
 Tasks performed in this exercise:
 
-* Create a resource group
-* Create Azure Event Hubs resources
-* Create a .NET console app to send and retrieve events
-* Clean up resources
+* Task 1: Create Azure Event Hubs resources
+* Task 2: Create an Azure Event Hubs namespace and event hub
+* Task 3: Assign a role to your Microsoft Entra user name
+* Task 4: Send and retrieve events with a .NET console application
+* Task 5: Add the starter code for the project
+* Task 6: Add code to complete the application
+* Task 7: Sign into Azure and run the app
 
 This exercise takes approximately **30** minutes to complete.
 
-## Create Azure Event Hubs resources
+### Task 1: Create Azure Event Hubs resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
 1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
+
+    ![](./media/lab7-12---1.png)
+
+    ![](./media/lab7-12---2.png)
+
+1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
+   
+    ![](./media/lab7-12---3.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. If you already have a resource group you want to use, proceed to the next step. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed.
+     ![](./media/lab7-12-1.1.png)
 
+1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. 
     ```
-    az group create --name myResourceGroup --location eastus
-    ```
-
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise. If you changed the location in the previous step, make the same change in the **location** variable.
-
-    ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    namespaceName=eventhubsns$RANDOM
+    resourceGroup=PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>
+    location=<inject key="Region" enableCopy="false"/>
+    namespaceName=eventhubsns<inject key="DeploymentID" enableCopy="false"/>
     ```
 
-### Create an Azure Event Hubs namespace and event hub
+### Task 2: Create an Azure Event Hubs namespace and event hub
 
 An Azure Event Hubs namespace is a logical container for event hub resources within Azure. It provides a unique scoping container where you can create one or more event hubs, which are used to ingest, process, and store large volumes of event data. The following instructions are performed in the cloud shell. 
 
@@ -54,14 +53,19 @@ An Azure Event Hubs namespace is a logical container for event hub resources wit
     az eventhubs namespace create --name $namespaceName --resource-group $resourceGroup -l $location
     ```
 
+     ![](./media/lab7-e2-1.png)
+
 1. Run the following command to create an event hub named **myEventHub** in the Event Hubs namespace. 
 
     ```
-    az eventhubs eventhub create --name myEventHub --resource-group $resourceGroup \
+    az eventhubs eventhub create --name myEventHub<inject key="DeploymentID" enableCopy="false"/> --resource-group $resourceGroup \
       --namespace-name $namespaceName
     ```
 
-### Assign a role to your Microsoft Entra user name
+    ![](./media/lab7-e2-2.png)
+
+
+### Task 3: Assign a role to your Microsoft Entra user name
 
 To allow your app to send and receive messages, assign your Microsoft Entra user to the **Azure Event Hubs Data Owner** role at the Event Hubs namespace level. This gives your user account permission to manage and access queues and topics using Azure RBAC. Perform the following steps in the cloud shell.
 
@@ -87,7 +91,7 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --scope $resourceID
     ```
 
-## Send and retrieve events with a .NET console application
+### Task 4: Send and retrieve events with a .NET console application
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -115,7 +119,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 Now it's time to replace the template code in the **Program.cs** file using the editor in the cloud shell.
 
-### Add the starter code for the project
+### Task 5: Add the starter code for the project
 
 1. Run the following command in the cloud shell to begin editing the application.
 
@@ -157,7 +161,7 @@ Now it's time to replace the template code in the **Program.cs** file using the 
 
 1. Press **ctrl+s** to save your changes.
 
-### Add code to complete the application
+### Task 6: Add code to complete the application
 
 In this section you add code to create the producer and consumer clients to send and receive events.
 
@@ -251,7 +255,7 @@ In this section you add code to create the producer and consumer clients to send
 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+### Task 7: Sign into Azure and run the app
 
 1. In the cloud shell command-line pane, enter the following command to sign into Azure.
 
@@ -284,13 +288,3 @@ In this section you add code to create the producer and consumer clients to send
 
 The application always sends three events to the hub, but it retrieves all events in the hub. If you run the application multiple times an increasing number of events are retrieved. The random numbers used for event creation help you identify different events.
 
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted. 

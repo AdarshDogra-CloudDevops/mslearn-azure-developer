@@ -1,54 +1,49 @@
----
-lab:
-    topic: Secure solutions in Azure
-    title: "Create and retrieve secrets from Azure Key Vault"
-    description: "Learn how to create a key vault and create and retrieve secrets with Azure CLI, and also programmatically."
----
+# Module 1: Create and Retrieve Secrets from Azure Key Vault
 
-# Create and retrieve secrets from Azure Key Vault
+## Lab Scenario
+In this exercise, you create an Azure Key Vault, store secrets using the Azure CLI, and build a .NET console application that can create and retrieve secrets from the key vault. You will learn how to configure authentication, manage secrets programmatically, and clean up resources when finished.
 
-In this exercise, you create an Azure Key Vault, store secrets using the Azure CLI, and build a .NET console application that can create and retrieve secrets from the key vault. You learn how to configure authentication, manage secrets programmatically, and clean up resources when finished.  
+## Lab Objectives
+In this lab, you will perform:
 
-Tasks performed in this exercise:
+- Create Azure Key Vault resources and add a secret
+- Assign a role to your Microsoft Entra user name
+- Add and retrieve a secret with Azure CLI
+- Create a .NET console app to store and retrieve secrets
+- Sign into Azure and run the app to create a new secret
 
-* Create Azure Key Vault resources
-* Store a secret in a key vault using Azure CLI
-* Create a .NET console app to create and retrieve secrets
-* Clean up resources
+## Estimated Timing: 30 minutes
 
-This exercise takes approximately **30** minutes to complete.
-
-## Create Azure Key Vault resources and add a secret
+# Task 1: Create Azure Key Vault resources and add a secret
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. Use the **[>_] (1)** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **Bash (2)** environment.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+     ![](./media/A01.png)
+
+     ![](./media/A02.png)
+
+2.  If you are prompted to select a storage account to persist your files, select **No storage account required (1)**, select the default **subscription (2)**, and then select **Apply (3)**.
+
+    ![](./media/A03.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
-1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
+1. In the cloud shell toolbar, in the **Settings (1)** menu, select **Go to Classic version (2)** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. If you already have a resource group you want to use, proceed to the next step. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed.
+    ![](./media/classicver.png)
 
-    ```
-    az group create --name myResourceGroup --location eastus
-    ```
-
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise. If you changed the location in the previous step, make the same change in the **location** variable.
+1. Run the following commands to create the needed variables to create an Azure key Vault. 
 
     ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    keyVaultName=mykeyvaultname$RANDOM
+    resourceGroup=ConfidentialStack
+    location=<inject key="Region" enableCopy="false"/>
+    keyVaultName=mykeyvaultname<inject key="DeploymentID" enableCopy="false"/>
+ 
     ```
 
-1. Run the following command to get the name of the key vault and record the name. You need it later in the exercise.
-
-    ```
-    echo $keyVaultName
-    ```
+    ![](./media/neededvar.png)
 
 1. Run the following command to create an Azure Key Vault resource. This can take a few minutes to run.
 
@@ -57,7 +52,11 @@ In this section of the exercise you create the needed resources in Azure with th
         --resource-group $resourceGroup --location $location
     ```
 
-### Assign a role to your Microsoft Entra user name
+    ![](./media/kvdone.png)
+
+    >**Note**:  Note down the name of Key Vault you created. You need it later in the exercise.
+
+# Task 2: Assign a role to your Microsoft Entra user name
 
 To create and retrieve a secret, assign your Microsoft Entra user to the **Key Vault Secrets Officer** role. This gives your user account permission to set, delete, and list secrets. In a typical scenario you may want to separate the create/read actions by assigning the **Key Vault Secrets Officer** to one group, and **Key Vault Secrets User** (can get and list secrets) to another.
 
@@ -84,21 +83,23 @@ To create and retrieve a secret, assign your Microsoft Entra user to the **Key V
         --scope $resourceID
     ```
 
-Next, add a secret to the key vault you created.
+    ![](./media/entra.png)
 
-### Add and retrieve a secret with Azure CLI
+# Task 3: Add and retrieve a secret with Azure CLI
 
 1. Run the following command to create a secret. 
 
     ```
     az keyvault secret set --vault-name $keyVaultName \
-        --name "MySecret" --value "My secret value"
+        --name "MySecret<inject key="DeploymentID" enableCopy="false"/>" --value "My secret value"
     ```
+
+    ![](./media/createsec.png)
 
 1. Run the following command to retrieve the secret to verify it was set.
 
     ```
-    az keyvault secret show --name "MySecret" --vault-name $keyVaultName
+    az keyvault secret show --name "MySecret<inject key="DeploymentID" enableCopy="false"/>" --vault-name $keyVaultName
     ```
 
     This command returns some JSON. The last line contains the password in plain text. 
@@ -107,11 +108,13 @@ Next, add a secret to the key vault you created.
     "value": "My secret value"
     ```
 
-## Create a .NET console app to store and retrieve secrets
+    ![](./media/retsec.png)
+
+# Task 4: Create a .NET console app to store and retrieve secrets
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
->**Tip:** Resize the cloud shell to display more information, and code, by dragging the top border. You can also use the minimize and maximize buttons to switch between the cloud shell and the main portal interface.
+>**Note**: Resize the cloud shell to display more information, and code, by dragging the top border. You can also use the minimize and maximize buttons to switch between the cloud shell and the main portal interface.
 
 1. Run the following commands to create a directory to contain the project and change into the project directory.
 
@@ -120,11 +123,15 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     cd keyvault
     ```
 
+    ![](./media/mkdir.png)
+
 1. Create the .NET console application.
 
     ```
     dotnet new console
     ```
+
+    ![](./media/.net.png)
 
 1. Run the following commands to add the **Azure.Identity** and **Azure.Security.KeyVault.Secrets** packages to the project.
 
@@ -132,6 +139,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet add package Azure.Identity
     dotnet add package Azure.Security.KeyVault.Secrets
     ```
+
+    ![](./media/idpkg.png)
 
 ### Add the starter code for the project
 
@@ -141,7 +150,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     code Program.cs
     ```
 
-1. Replace any existing contents with the following code. Be sure to replace **YOUR-KEYVAULT-NAME** with your actual key vault name.
+1. Replace any existing contents with the following code. Be sure to replace **YOUR-KEYVAULT-NAME**  with your actual key vault name you created in Exercise 1.
 
     ```csharp
     using Azure.Identity;
@@ -168,6 +177,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     
     ```
 
+    ![](./media/csprog.png)
+
 1. Press **ctrl+s** to save your changes.
 
 ### Add code to complete the application
@@ -187,6 +198,8 @@ Now it's time to add code to complete the application.
     // Create the Key Vault client using the URL and authentication credentials
     var client = new SecretClient(new Uri(KeyVaultUrl), new DefaultAzureCredential(options));
     ```
+
+    ![](./media/client.png)
 
 1. Locate the **// ADD CODE TO CREATE A MENU SYSTEM** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -230,6 +243,8 @@ Now it's time to add code to complete the application.
         }
     }
     ```
+
+    ![](./media/menu.png)
 
 1. Locate the **// ADD CODE TO CREATE A SECRET** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -280,6 +295,8 @@ Now it's time to add code to complete the application.
         }
     }
     ```
+
+    ![](./media/ccs.png)
 
 1. Locate the **// ADD CODE TO LIST SECRETS** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -336,9 +353,11 @@ Now it's time to add code to complete the application.
     }
     ```
 
+    ![](./media/ls.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+# Task 5: Sign into Azure and run the app to create a new secret
 
 1. In the cloud shell, enter the following command to sign into Azure.
 
@@ -346,9 +365,27 @@ Now it's time to add code to complete the application.
     az login
     ```
 
-    **<font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
+    **Note: <font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
 
-    > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+1. After running the az login command, select the **authentication link (1)** shown in the Cloud Shell output and **copy the displayed code (2)**.
+
+    ![](./media/link.png)
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/cnext.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/paa.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/clisign.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/1enter.png)
 
 1. Run the following command to start the console app. The app will display the menu system for the application. 
 
@@ -358,19 +395,25 @@ Now it's time to add code to complete the application.
 
 1. You created a secret at the beginning of this exercise, enter **2** to retrieve and display it.
 
+    ![](./media/disp.png)
+
+    ![](./media/inisec.png)
+
 1. Enter **1** and enter a secret name and value to create a new secret.
 
-1. List the secrets again to view your new addition.
+    ![](./media/newsec.png)
 
-Enter **quit** when you are finished with the application.
+1. Enter secret name as **newsecret<inject key="DeploymentID" enableCopy="false"/> (1)** and secret value as **mysecretvalue (2)** and press enter.
 
-## Clean up resources
+    ![](./media/2ndsec.png)
 
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
+1. List the secrets again by providing  2 as option value to view your new addition.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
+    ![](./media/listfinal.png)
 
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
+1. Enter **quit** when you are finished with the application.
+
+## Summary
+
+In this lab, you created an Azure Key Vault and configured the required access to store and retrieve secrets securely. You added a secret using the Azure CLI, assigned the Key Vault Secrets Officer role to your Microsoft Entra account, and verified access by retrieving the stored secret. You then built a .NET console application that connects to Azure Key Vault using DefaultAzureCredential, allowing you to programmatically create and list secrets. Finally, you authenticated with Azure CLI, ran the application, and successfully tested secret creation and retrieval through the interactive menu system.
+

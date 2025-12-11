@@ -26,23 +26,25 @@ In this lab, you will perform:
 
     ![Screenshot of the Web App tile.](./media/01/C2.png)
 
-5. Fill out the **Basics** tab with the information in the following table:
+5. Fill out the **Basics** tab with the information in the following table and navigate to the **Database page (6)** :
 
     | Setting | Action |
     |--------|--------|
     | **Subscription** | Retain the default value. |
     | **Resource group** |  **ManagedPlatform-<inject key="DeploymentID" enableCopy="false"/>** |
-    | **Name** | Enter a unique name **containerwebapp-<inject key="DeploymentID" enableCopy="false"/>** |
-    | **Slider under Name** | Select the slider to turn it off (if visible). |
-    | **Publish** | Select **Container**. |
-    | **Operating System** | Ensure **Linux** is selected. |
-    | **Region** | Retain the default selection, or choose a region near you. |
+    | **Name** | Enter a unique name **containerwebapp-<inject key="DeploymentID" enableCopy="false"/> (1)** |
+    | **Slider under Name** | Select the slider to turn it off (if visible) **(2)**. |
+    | **Publish** | Select **Container (3)**. |
+    | **Operating System** | Ensure **Linux (4)** is selected. |
+    | **Region** | Retain the default selection (5) |
     | **Linux Plan** | Retain the default value. |
-    | **Pricing plan** | Select the drop-down and choose **Free F1**. |
+    | **Pricing plan** | Select the drop-down and choose **Free F1 (6)**. |
 
     ![](./media/01/D1.png)
 
-6. Navigate to the **Container** tab, enter the required details, and then select **Review + create (6)**.
+6. In **Database page** leave it as default and navigate to **Container page ** 
+
+6. Once in the **Container** page, enter the required details, and then select **Review + create (6)**.
 
     | Setting | Action |
     |--------|--------|
@@ -65,7 +67,7 @@ In this lab, you will perform:
 
 ---
 
-## Task 3: View the Web App
+## Task 2: View the Web App
 
 1. In the App Service overview page, select the link next to **Default domain**.  
 
@@ -75,13 +77,7 @@ In this lab, you will perform:
 
     ![](./media/01/D100.png)
 
-> **Note:** It may take a few minutes for the container to fully load.
-
----
-
-# Exercise Review
-
-In this exercise, you created a Linux-based Azure App Service Web App, configured it to use a public container image from Microsoft Container Registry, deployed the application, and verified it is running successfully in a browser.
+    > **Note:** It may take a few minutes for the container to fully load.
 
 ---
 

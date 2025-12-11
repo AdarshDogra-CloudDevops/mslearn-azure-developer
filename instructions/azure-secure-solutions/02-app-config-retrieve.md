@@ -1,22 +1,18 @@
----
-lab:
-    topic: Secure solutions in Azure
-    title: "Retrieve configuration settings from Azure App Configuration"
-    description: "Learn how to create an Azure App Configuration resource, and set configuration information with Azure CLI. Then, use the **ConfigurationBuilder** to retrieve settings for you application."
----
+# Lab 2: Retrieve Configuration Settings from Azure App Configuration
 
-# Retrieve configuration settings from Azure App Configuration
+## Lab Scenario
+In this exercise, you create an Azure App Configuration resource, store configuration settings using the Azure CLI, and build a .NET console application that uses the ConfigurationBuilder to retrieve configuration values. You learn how to organize settings with hierarchical keys and authenticate your application to access cloud-based configuration data.
 
-In this exercise, you create an Azure App Configuration resource, store configuration settings using Azure CLI, and build a .NET console application that uses the **ConfigurationBuilder** to retrieve configuration values. You learn how to organize settings with hierarchical keys and authenticate your application to access cloud-based configuration data.
+## Lab Objectives
+In this lab, you will perform:
 
-Tasks performed in this exercise:
+- Create an Azure App Configuration resource  
+- Store connection string configuration information  
+- Create a .NET console app to retrieve configuration settings  
+- Clean up resources  
 
-* Create an Azure App Configuration resource
-* Store connection string configuration information
-* Create a .NET console app to retrieve the configuration information
-* Clean up resources
+## Estimated Timing: 15 minutes
 
-This exercise takes approximately **15** minutes to complete.
 
 ## Create an Azure App Configuration resource and add configuration information
 

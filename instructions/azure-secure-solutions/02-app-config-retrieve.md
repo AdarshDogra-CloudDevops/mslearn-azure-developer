@@ -1,4 +1,4 @@
-# Lab 2: Retrieve Configuration Settings from Azure App Configuration
+# Module 2: Retrieve Configuration Settings from Azure App Configuration
 
 ## Lab Scenario
 In this exercise, you create an Azure App Configuration resource, store configuration settings using the Azure CLI, and build a .NET console application that uses the ConfigurationBuilder to retrieve configuration values. You learn how to organize settings with hierarchical keys and authenticate your application to access cloud-based configuration data.
@@ -6,57 +6,46 @@ In this exercise, you create an Azure App Configuration resource, store configur
 ## Lab Objectives
 In this lab, you will perform:
 
-- Create an Azure App Configuration resource  
-- Store connection string configuration information  
-- Create a .NET console app to retrieve configuration settings  
-- Clean up resources  
+- Create an Azure App Configuration resource and add configuration information  
+- Assign a role to your Microsoft Entra user name  
+- Add configuration information with Azure CLI 
+- Create a .NET console app to retrieve configuration information
+- Sign into Azure and run the app  
 
 ## Estimated Timing: 15 minutes
 
 
-## Create an Azure App Configuration resource and add configuration information
+## Task: 1 Create an Azure App Configuration resource and add configuration information
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+1. Use the **[>_] (1)** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **Bash (2)** environment.
+
+     ![](./media/A01.png)
+
+     ![](./media/A02.png)
+
+2.  If you are prompted to select a storage account to persist your files, select **No storage account required (1)**, select the default **subscription (2)**, and then select **Apply (3)**.
+
+    ![](./media/A03.png)
 
     > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
-1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
+1. In the cloud shell toolbar, in the **Settings (1)** menu, select **Go to Classic version (2)** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. If you already have a resource group you want to use, proceed to the next step. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus** with a region near you if needed.
+    ![](./media/classicver.png)
 
-    ```
-    az group create --name myResourceGroup --location eastus
-    ```
-
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise. If you changed the location in the previous step, make the same change in the **location** variable.
+1. Run the following commands to create the needed variables.
 
     ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    appConfigName=appconfigname$RANDOM
+    resourceGroup=ConfidentialStack
+    location=<inject key="Region" enableCopy="false"/>
+    appConfigName=appconfig<inject key="DeploymentID" enableCopy="false"/>
     ```
 
-1. Run the following command to get the name of App Configuration resource. Record the name, you need it later in the exercise.
-
-    ```
-    echo $appConfigName
-    ```
-
-1. Run the following command to ensure the **Microsoft.AppConfiguration** provider is registered for your subscription.
-
-    ```
-    az provider register --namespace Microsoft.AppConfiguration
-    ```
-
-1. It can take a few minutes for the registration to complete. Run the following command to check the status of the registration. Proceed to the next step when the results return **Registered**.
-
-    ```
-    az provider show --namespace Microsoft.AppConfiguration --query "registrationState"
-    ```
+    >**Note**: Note down the App configuration name you have created. You need it later in the exercise. 
 
 1. Run the following command to create an Azure App Configuration resource. This can take a few minutes to run.
 
@@ -67,10 +56,12 @@ In this section of the exercise you create the needed resources in Azure with th
         --sku Free
     ```
 
-    >**Tip:** If there is an issue creating the AppConfig Resource due to quota restrictions using the **Free** SKU value, please use **Developer** instead.
+    ![](./media/appconfig.png)
+
+    >**NOTE:** If there is an issue creating the AppConfig Resource due to quota restrictions using the **Free** SKU value, please use **Developer** instead.
     
 
-### Assign a role to your Microsoft Entra user name
+### Task: 2 Assign a role to your Microsoft Entra user name
 
 To retrieve configuration information, you need to assign your Microsoft Entra user to the **App Configuration Data Reader** role. 
 
@@ -97,9 +88,9 @@ To retrieve configuration information, you need to assign your Microsoft Entra u
         --scope $resourceID
     ```
 
-Next, add a placeholder connection string to App Configuration.
+    ![](./media/upapp.png)
 
-### Add configuration information with Azure CLI
+### Task: 3 Add configuration information with Azure CLI
 
 In Azure App Configuration, a key like **Dev:conStr** is a hierarchical, or namespaced key. The colon (:) acts as a delimiter that creates a logical hierarchy, where:
 
@@ -108,22 +99,24 @@ In Azure App Configuration, a key like **Dev:conStr** is a hierarchical, or name
 
 This hierarchical structure allows you to organize configuration settings by environment, feature, or application component, making it easier to manage and retrieve related settings.
 
-Run the following command to store the placeholder connection string. 
+1. Run the following command to store the placeholder connection string. 
 
-```
-az appconfig kv set --name $appConfigName \
-    --key Dev:conStr \
-    --value connectionString \
-    --yes
-```
+    ```
+    az appconfig kv set --name $appConfigName \
+        --key Dev:conStr \
+        --value connectionString<inject key="DeploymentID" enableCopy="false"/> \
+        --yes
+    ```
 
-This command returns some JSON. The last line contains the value in plain text. 
+1. This command returns some JSON. The last line contains the value in plain text. 
 
-```json
-"value": "connectionString"
-```
+    ```json
+    "value": "connectionString<inject key="DeploymentID"  enableCopy="false"/>"
+    ```
 
-## Create a .NET console app to retrieve configuration information
+    ![](./media/devcon.png)
+
+## Task: 4 Create a .NET console app to retrieve configuration information
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -136,11 +129,15 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     cd appconfig
     ```
 
+    ![](./media/appmkdir.png)
+
 1. Create the .NET console application.
 
     ```
     dotnet new console
     ```
+
+    ![](./media/newcon.png)
 
 1. Run the following commands to add the **Azure.Identity** and **Microsoft.Extensions.Configuration.AzureAppConfiguration** packages to the project.
 
@@ -148,6 +145,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet add package Azure.Identity
     dotnet add package Microsoft.Extensions.Configuration.AzureAppConfiguration
     ```
+
+    ![](./media/azid.png)
 
 ### Add the code for the project
 
@@ -202,9 +201,11 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     }
     ```
 
+    ![](./media/csapp2.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+## Task: 5 Sign into Azure and run the app
 
 1. In the cloud shell, enter the following command to sign into Azure.
 
@@ -214,7 +215,21 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
     **<font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
 
-    > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+1. After running the az login command, select the **authentication link (1)** shown in the Cloud Shell output and **copy the displayed code (2)**.
+
+    ![](./media/link.png)
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/cnext.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/paa.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/clisign.png)
 
 1. Run the following command to start the console app. The app will display the **connectionString** value you assigned to the **Dev:conStr** setting earlier in the exercise.
 
@@ -224,13 +239,6 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
     The app will display the **connectionString** value you assigned to the **Dev:conStr** setting earlier in the exercise.
 
-## Clean up resources
+    ![](./media/dotnetrun.png)
 
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
+## Summary

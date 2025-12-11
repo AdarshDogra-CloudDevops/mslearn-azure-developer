@@ -1,48 +1,60 @@
----
-lab:
-    topic: Azure Storage
-    title: 'Create Blob storage resources with the .NET client library'
-    description: 'Learn how to use the Azure Storage .NET client library to create containers, upload and list blobs, and delete containers.'
----
+# Lab 10: Create Blob storage resources with the .NET client library
 
-# Create Blob storage resources with the .NET client library
+## Lab Scenario
 
 In this exercise, you create an Azure Storage account and build a .NET console application using the Azure Storage Blob client library to create containers, upload files to blob storage, list blobs, and download files. You learn how to authenticate with Azure, perform blob storage operations programmatically, and verify results in the Azure portal.
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
-* Prepare the Azure resources
-* Create a console app to create and download data
-* Run the app and verify results
-* Clean up resources
+* Task 1: Create an Azure Storage account
+* Task 2: Assign a role to your Microsoft Entra user name
+* Task 3: Create a .NET console app to create containers and items
+* Task 4: Add the starter code for the project
+* Task 5: Add code to complete the project
+* Task 6: Sign into Azure and run the app
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated Timing: 30 Minutes
 
-## Create an Azure Storage account
+### Task 1: Create an Azure Storage account
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. In the lab VM, click on the **Azure Portal icon** as shown below:
 
-1. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new cloud shell in the Azure portal, selecting a ***Bash*** environment. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal. If you are prompted to select a storage account to persist your files, select **No storage account required**, your subscription, and then select **Apply**.
+    ![](./media/lab2-12-0.png)
 
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+    - On the **Sign in to Microsoft Azure** tab, you will see the login screen. Enter your credentials:
+      
+        * **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+    
+    - Next, provide your password:
+
+        * **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
+
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash**.
+
+    ![](./media/lab7-12---1.png)
+
+    ![](./media/lab7-12---2.png)
+
+1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
+   
+    ![](./media/lab7-12---3.png)
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
-1. Create a resource group for the resources needed for this exercise. Replace **myResourceGroup** with a name you want to use for the resource group. You can replace **eastus2** with a region near you if needed. If you already have a resource group you want to use, proceed to the next step.
+     ![](./media/lab7-12-1.1.png)
+
+1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. 
 
     ```
-    az group create --location eastus2 --name myResourceGroup
+    resourceGroup=StorageMedia-<inject key="DeploymentID" enableCopy="false"/>
+    location=<inject key="Region" enableCopy="false"/>
+    accountName=storageacct<inject key="DeploymentID" enableCopy="false"/>
     ```
 
-1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. Replace **myResourceGroup** with the name you're using for this exercise.
-
-    ```
-    resourceGroup=myResourceGroup
-    location=eastus
-    accountName=storageacct$RANDOM
-    ```
+    ![](./media/lab10-12-1.png)
 
 1. Run the following commands to create the Azure Storage account, each account name must be unique. The first command creates a variable with a unique name for your storage account. Record the name of your account from the output of the **echo** command. 
 
@@ -55,7 +67,11 @@ In this section of the exercise you create the needed resources in Azure with th
     echo $accountName
     ```
 
-### Assign a role to your Microsoft Entra user name
+    ![](./media/lab10-12-2.png)
+
+    ![](./media/lab10-12-2.1.png)
+
+### Task 2: Assign a role to your Microsoft Entra user name
 
 To allow your app to create resources and items, assign your Microsoft Entra user to the **Storage Blob Data Owner** role. Perform the following steps in the cloud shell.
 
@@ -84,7 +100,9 @@ To allow your app to create resources and items, assign your Microsoft Entra use
         --scope $resourceID
     ```
 
-## Create a .NET console app to create containers and items
+     ![](./media/lab10-12-3.png)
+
+### Task 3: Create a .NET console app to create containers and items
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -101,6 +119,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet new console
     ```
 
+     ![](./media/lab10-12-4.png)
+
 1. Run the following commands to add the required packages in the application.
 
     ```
@@ -116,7 +136,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 Now it's time to add the code for the project.
 
-### Add the starter code for the project
+### Task 4: Add the starter code for the project
 
 1. Run the following command in the cloud shell to begin editing the application.
 
@@ -174,10 +194,12 @@ Now it's time to add the code for the project.
     }
     ```
 
+     ![](./media/lab10-12-5.png)
+
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
 
-## Add code to complete the project
+### Task 5: Add code to complete the project
 
 Throughout the rest of the exercise you add code in specified areas to create the full application. 
 
@@ -194,6 +216,8 @@ Throughout the rest of the exercise you add code in specified areas to create th
     string blobServiceEndpoint = $"https://{accountName}.blob.core.windows.net";
     BlobServiceClient blobServiceClient = new BlobServiceClient(new Uri(blobServiceEndpoint), credential);
     ```
+
+     ![](./media/lab10-12-6.png)
 
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
@@ -221,6 +245,8 @@ Throughout the rest of the exercise you add code in specified areas to create th
     }
     ```
 
+    ![](./media/lab10-12-7.png)
+
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
 1. Find the **// CREATE A LOCAL FILE FOR UPLOAD TO BLOB STORAGE** comment, then add the following code directly beneath the comment. This creates a file in the data directory that is uploaded to the container.
@@ -237,6 +263,8 @@ Throughout the rest of the exercise you add code in specified areas to create th
     Console.WriteLine("Local file created, press 'Enter' to continue.");
     Console.ReadLine();
     ```
+
+     ![](./media/lab10-12-8.png)
 
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
@@ -269,6 +297,8 @@ Throughout the rest of the exercise you add code in specified areas to create th
     }
     ```
 
+     ![](./media/lab10-12-9.png)
+
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
 1. Locate the **// LIST BLOBS IN THE CONTAINER** comment, then add the following code directly beneath the comment. You list the blobs in the container with the **GetBlobsAsync** method. In this case, only one blob was added to the container, so the listing operation returns just that one blob. 
@@ -283,6 +313,8 @@ Throughout the rest of the exercise you add code in specified areas to create th
     Console.WriteLine("Press 'Enter' to continue.");
     Console.ReadLine();
     ```
+
+     ![](./media/lab10-12-10.png)
 
 1. Press **ctrl+s** to save your changes, and continue to the next step.
 
@@ -307,9 +339,11 @@ Throughout the rest of the exercise you add code in specified areas to create th
     Console.WriteLine("Blob downloaded successfully to: {0}", downloadFilePath);
     ```
 
+     ![](./media/lab10-12-11.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-## Sign into Azure and run the app
+### Task 6: Sign into Azure and run the app
 
 1. In the cloud shell command-line pane, enter the following command to sign into Azure.
 
@@ -319,7 +353,25 @@ Throughout the rest of the exercise you add code in specified areas to create th
 
     **<font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
 
-    > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+1. After running the az login command, select the **authentication link (1)** shown in the Cloud Shell output and **copy the displayed code (2)**.
+
+     ![](./media/lab10-12-12.png)
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/lab7-12-14.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/lab7-12-15.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/lab7-12-16.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/lab7-12-17.png)
 
 1. Run the following command to start the console app. The app will pause many times during execution waiting for you to press any key to continue. This gives you an opportunity to view the messages in the Azure portal.
 
@@ -327,11 +379,19 @@ Throughout the rest of the exercise you add code in specified areas to create th
     dotnet run
     ```
 
+     ![](./media/lab10-12-13.png)
+
 1. In the Azure portal, navigate to the Azure Storage account you created. 
 
-1. Expand **> Data storage** in the left navigation and select **Containers**.
+     ![](./media/lab10-12-14.png)
 
-1. Select the container the application created and you can view the blob that was uploaded.
+1. Expand **> Data storage (1)** in the left navigation and select **Containers (2)**.
+
+1. Select the container the application **(3)** created and you can view the blob that was uploaded.
+
+     ![](./media/lab10-12-15.png)
+
+     ![](./media/lab10-12-16.png)
 
 1. Run the two commands below to change into the **data** directory and list the files that were uploaded and downloaded.
 
@@ -340,14 +400,4 @@ Throughout the rest of the exercise you add code in specified areas to create th
     ls
     ```
 
-## Clean up resources
-
-Now that you finished the exercise, you should delete the cloud resources you created to avoid unnecessary resource usage.
-
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
-1. Navigate to the resource group you created and view the contents of the resources used in this exercise.
-1. On the toolbar, select **Delete resource group**.
-1. Enter the resource group name and confirm that you want to delete it.
-
-> **CAUTION:** Deleting a resource group deletes all resources contained within it. If you chose an existing resource group for this exercise, any existing resources outside the scope of this exercise will also be deleted.
-
+     ![](./media/lab10-12-17.png)

@@ -15,7 +15,7 @@ In this lab, you will perform:
 * Task 6: Add the code for the project
 * Task 7: Sign into Azure and run the app
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated Timing: 30 Minutes
 
 ## Exercise 1: Route events to a custom endpoint with Azure Event Grid
 
@@ -23,9 +23,19 @@ This exercise takes approximately **30** minutes to complete.
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. In the lab VM, click on the **Azure Portal icon** as shown below:
 
-1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
+    ![](./media/lab2-12-0.png)
+
+    - On the **Sign in to Microsoft Azure** tab, you will see the login screen. Enter your credentials:
+      
+        * **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+    
+    - Next, provide your password:
+
+        * **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
+
+1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash**.
 
     ![](./media/lab7-12---1.png)
 
@@ -108,7 +118,11 @@ You subscribe to an Event Grid topic to tell Event Grid which events you want to
         --endpoint $endpoint
     ```
 
+     ![](./media/lab7-12-6.png)
+
 1. View your web app again, and notice that a subscription validation event has been sent to it. Select the eye icon to expand the event data. Event Grid sends the validation event so the endpoint can verify that it wants to receive event data. The web app includes code to validate the subscription.
+
+     ![](./media/lab7-12-7.png)
 
 ### Task 4: Send an event with a .NET console application
 
@@ -129,12 +143,16 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet new console
     ```
 
+     ![](./media/lab7-12-8.png)
+
 1. Run the following commands to add the **Azure.Messaging.EventGrid** and **dotenv.net** packages to the project.
 
     ```bash
     dotnet add package Azure.Messaging.EventGrid
     dotnet add package dotenv.net
     ```
+
+     ![](./media/lab7-12-9.png)
 
 ### Task 5: Configure the console application
 
@@ -146,6 +164,10 @@ In this section you retrieve the topic endpoint and access key so they can be ad
     az eventgrid topic show --name $topicName -g $resourceGroup --query "endpoint" --output tsv
     az eventgrid topic key list --name $topicName -g $resourceGroup --query "key1" --output tsv
     ```
+
+     ![](./media/lab7-12-10.png)
+
+     >**Note:** Copy the **endpoint URL** and **access key** values into a Notepad file.
 
 1. Run the following command to create the **.env** file to hold the secrets, and then open it in the code editor.
 
@@ -160,6 +182,8 @@ In this section you retrieve the topic endpoint and access key so they can be ad
     TOPIC_ENDPOINT="YOUR_TOPIC_ENDPOINT"
     TOPIC_ACCESS_KEY="YOUR_TOPIC_ACCESS_KEY"
     ```
+    
+    ![](./media/lab7-12-12.png)
 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
@@ -167,13 +191,13 @@ Now it's time to replace the template code in the **Program.cs** file using the 
 
 ### Task 6: Add the code for the project
 
-1. Run the following command in the cloud shell to begin editing the application.
+1. Run the following command in the cloud shell to begin editing the application **(1)**.
 
     ```bash
     code Program.cs
     ```
 
-1. Replace any existing code with the following code. Be sure to review the comments in the code.
+1. Replace any existing code with the following code **(2)**. Be sure to review the comments in the code.
 
     ```csharp
     using dotenv.net; 
@@ -218,6 +242,8 @@ Now it's time to replace the template code in the **Program.cs** file using the 
     }
     ```
 
+     ![](./media/lab7-12-01.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
 ### Task 7: Sign into Azure and run the app
@@ -230,13 +256,35 @@ Now it's time to replace the template code in the **Program.cs** file using the 
 
     **<font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
 
-    > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+    > **Note:** In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+
+1. After running the az login command, select the **authentication link (1)** shown in the Cloud Shell output and **copy the displayed code (2)**.
+
+     ![](./media/lab7-12-13.png)
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/lab7-12-14.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/lab7-12-15.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/lab7-12-16.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/lab7-12-17.png)
 
 1. Run the following command in the cloud shell to start the console application. You will see the message **Event sent successfully.** when the message is sent.
 
     ```bash
     dotnet run
     ```
+     
+     ![](./media/lab7-12-18.png)
 
 1. View your web app to see the event you just sent. Select the eye icon to expand the event data.
 

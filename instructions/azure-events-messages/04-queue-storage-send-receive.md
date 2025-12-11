@@ -1,8 +1,11 @@
 ## Exercise 4: Send and receive messages from Azure Queue storage
 
+## Lab Scenario
+
 In this exercise, you create and configure Azure Queue Storage resources, then build a .NET app to send and receive messages using the **Azure.Storage.Queues** SDK. You learn how to provision storage resources, manage queue messages, and clean up your environment when finished. 
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
 * Task 1: Create Azure Queue storage resources
 * Task 2: Assign a role to your Microsoft Entra user name
@@ -14,13 +17,13 @@ Tasks performed in this exercise:
 * Task 8: Add code to delete messages and the queue
 * Task 9: Sign into Azure and run the app
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated Timing: 30 Minutes
 
 ### Task 1: Create Azure Queue storage resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. In your browser navigate to the Azure portal 
 
 1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
 
@@ -32,7 +35,7 @@ In this section of the exercise you create the needed resources in Azure with th
    
     ![](./media/lab7-12---3.png)
 
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+    >**Note:** If your Cloud Shell environment is already configured, you can skip this step and proceed to the next.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
@@ -53,6 +56,8 @@ In this section of the exercise you create the needed resources in Azure with th
     ```
 
     ![](./media/lab7-e3-15.png)
+
+    >**Note:** Copy the storage account name: **storactname<inject key="DeploymentID" enableCopy="false"/>** value into a Notepad. You will use it in a later task.
 
 1. Run the following command to create a storage account using the variable you created earlier. The operation takes a few minutes to complete.
 
@@ -90,6 +95,8 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --scope $resourceID
     ```
 
+     ![](./media/lab7-e3-17.png)
+
 ### Task 3: Create a .NET console app to send and receive messages
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
@@ -108,6 +115,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     ```
     dotnet new console
     ```
+
+     ![](./media/lab7-e3-18.png)
 
 1. Run the following commands to add the **Azure.Storage.Queues** and **Azure.Identity** packages to the project.
 
@@ -186,6 +195,8 @@ Now it's time to add code to create the queue storage client and create a queue.
     Console.ReadLine();
     ```
 
+     ![](./media/lab7-e3-19.png)
+
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
 ### Task 6: Add code to send and list messages in a queue
@@ -214,6 +225,8 @@ Now it's time to add code to create the queue storage client and create a queue.
     Console.ReadLine();
     ```
 
+    ![](./media/lab7-e3-20.png)
+
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
 ### Task 7: Add code to update a message and list the results
@@ -237,6 +250,8 @@ Now it's time to add code to create the queue storage client and create a queue.
     Console.WriteLine("\nPress Enter to delete messages from the queue...");
     Console.ReadLine();
     ```
+
+    ![](./media/lab7-e3-21.png)
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
@@ -265,6 +280,8 @@ Now it's time to add code to create the queue storage client and create a queue.
     Console.WriteLine("Done");
     ```
 
+    ![](./media/lab7-e3-22.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
 ### Task 9: Sign into Azure and run the app
@@ -277,7 +294,25 @@ Now it's time to add code to create the queue storage client and create a queue.
 
     **<font color="red">You must sign into Azure - even though the cloud shell session is already authenticated.</font>**
 
-    > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+    > **Note:** In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
+
+1. After running the az login command, select the **authentication link** shown in the Cloud Shell output and **copy the displayed code**.
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/lab7-12-14.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/lab7-12-15.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/lab7-12-16.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/lab7-12-17.png)
 
 1. Run the following command to start the console app. The app will pause many times during execution waiting for you to press any key to continue. This gives you an opportunity to view the messages in the Azure portal.
 
@@ -285,9 +320,19 @@ Now it's time to add code to create the queue storage client and create a queue.
     dotnet run
     ```
 
-1. In the Azure portal, navigate to the Azure Storage account you created. 
+     ![](./media/lab7-e3-23.png)
 
-1. Expand **> Data storage** in the left navigation and select **Queues**.
+     ![](./media/lab7-e3-25.png)
 
-1. Select the queue the application creates and you can view the sent messages and monitor what the application is doing.
+1. In the Azure portal, navigate to **PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>** resource group and select the **storactname<inject key="DeploymentID" enableCopy="false"/>**.
+
+     ![](./media/lab7-e3-24.png)
+
+1. On **storactname<inject key="DeploymentID" enableCopy="false"/>** page, expand **> Data storage (1)** in the left navigation and select **Queues (2)**.
+
+     ![](./media/lab7-e3-26.png)
+
+1. Select the queue the application creates **(3)** and you can view the sent messages and monitor what the application is doing.
+
+     ![](./media/lab7-e3-27.png)
 

@@ -1,8 +1,11 @@
 ## Exercise 3: Send and receive messages from Azure Service Bus
 
+## Lab Scenario
+
 In this exercise, you create and configure Azure Service Bus resources, then build a .NET app to send and receive messages using the **Azure.Messaging.ServiceBus** SDK. You learn how to provision a Service Bus namespace and queue, assign permissions, and interact with messages programmatically. 
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
 * Task 1: Create Azure Event Hubs resources
 * Task 2: Create an Azure Service Bus namespace and queue
@@ -13,13 +16,13 @@ Tasks performed in this exercise:
 * Task 7: Add code to process messages in the queue
 * Task 8: Sign into Azure and run the app
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated Timing: 30 Minutes
 
 ### Task 1: Create Azure Event Hubs resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. In your browser navigate to the Azure portal 
 
 1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
 
@@ -31,7 +34,7 @@ In this section of the exercise you create the needed resources in Azure with th
    
     ![](./media/lab7-12---3.png)
 
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+    >**Note:** If your Cloud Shell environment is already configured, you can skip this step and proceed to the next.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
@@ -53,6 +56,8 @@ In this section of the exercise you create the needed resources in Azure with th
 
     ![](./media/lab7-e3-1.png)
 
+    >**Note:** Copy the namespace: **svcbusns<inject key="DeploymentID" enableCopy="false"/>** value into a Notepad file. You will use it in a later task.
+
 ### Task 2: Create an Azure Service Bus namespace and queue
 
 1. Create a Service Bus messaging namespace. The following command creates a namespace using the variable you created earlier. The operation takes a few minutes to complete.
@@ -71,7 +76,7 @@ In this section of the exercise you create the needed resources in Azure with th
     ```bash
     az servicebus queue create --resource-group $resourceGroup \
         --namespace-name $namespaceName \
-        --name myqueue
+        --name myqueue<inject key="DeploymentID" enableCopy="false"/>
     ```
 
      ![](./media/lab7-e3-3.png)
@@ -102,6 +107,8 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --role "Azure Service Bus Data Owner" \
         --scope $resourceID
     ```
+    
+    ![](./media/lab7-e3-4.png)
 
 ### Task 4: Create a .NET console app to send and receive messages
 
@@ -147,7 +154,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     
     // TODO: Replace <YOUR-NAMESPACE> with your Service Bus namespace
     string svcbusNameSpace = "<YOUR-NAMESPACE>.servicebus.windows.net";
-    string queueName = "myQueue";
+    string queueName = "myqueue<inject key="DeploymentID" enableCopy="false"/>";
     
     
     // ADD CODE TO CREATE A SERVICE BUS CLIENT
@@ -165,6 +172,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     // Dispose client after use
     await client.DisposeAsync();
     ```
+
+     ![](./media/lab7-e3-6.png)
 
 1. Press **ctrl+s** to save your changes.
 
@@ -186,6 +195,8 @@ Now it's time to add code to create the Service Bus client and send a batch of m
     // The DefaultAzureCredential will use the Azure CLI credentials, so ensure you are logged in
     ServiceBusClient client = new(svcbusNameSpace, new DefaultAzureCredential(options));
     ```
+
+     ![](./media/lab7-e3-7.png)
 
 1. Locate the **// ADD CODE TO SEND MESSAGES TO THE QUEUE** comment and add the following code directly after the comment. Be sure to review the code and comments.
 
@@ -225,6 +236,8 @@ Now it's time to add code to create the Service Bus client and send a batch of m
     Console.WriteLine("Press any key to continue");
     Console.ReadKey();
     ```
+
+     ![](./media/lab7-e3-8.png)
 
 1. Press **ctrl+s** to save the file, then continue with the exercise.
 
@@ -295,6 +308,8 @@ Now it's time to add code to create the Service Bus client and send a batch of m
     }
     ```
 
+     ![](./media/lab7-e3-9.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
 ### Task 8: Sign into Azure and run the app
@@ -309,20 +324,48 @@ Now it's time to add code to create the Service Bus client and send a batch of m
 
     > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
 
+1. After running the az login command, select the **authentication link** shown in the Cloud Shell output and **copy the displayed code**.
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/lab7-12-14.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/lab7-12-15.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/lab7-12-16.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/lab7-12-17.png)
+
 1. Run the following command to start the console app. The app will pause a various stages and prompt you to press a key to continue. This gives you an opportunity to view the messages in the Azure portal.
 
     ```
     dotnet run
     ```
 
-1. In the Azure portal, navigate to the Service Bus namespace you created. 
+1. In the Azure portal, navigate **PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>** resource group and and select the **svcbusns<inject key="DeploymentID" enableCopy="false"/>** Service Bus namespace.
 
-1. Select **myqueue** at the bottom of the **Overview** window.
+     ![](./media/lab7-e3-10.png)
 
-1. Select **Service Bus Explorer** in the left navigation pane.
+1. On **svcbusns<inject key="DeploymentID" enableCopy="false"/>** page, select **myqueue<inject key="DeploymentID" enableCopy="false"/>** at the bottom of the **Overview** window.
 
-1. Select **Peek from start** and the three messages should appear after a few seconds.
+     ![](./media/lab7-e3-11.png)
 
-1. In the cloud shell, press any key to continue and the application will process the three messages. 
+1. On **myqueue<inject key="DeploymentID" enableCopy="false"/>** page, select **Service Bus Explorer (1)** in the left navigation pane.
+
+1. Select **Peek from start (2)** and the three messages should appear after a few seconds.
+
+      ![](./media/lab7-e3-12.png)
+
+1. Navigate back to cloud shell, press any key to continue and the application will process the three messages. 
  
+     ![](./media/lab7-e3-13.png)
+
 1. Return to the portal after the application has completed processing the messages. Select **Peek from start** again and notice there are no messages in the queue.
+
+     ![](./media/lab7-e3-14.png)

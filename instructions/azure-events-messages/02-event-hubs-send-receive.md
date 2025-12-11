@@ -1,8 +1,11 @@
 ## Exercise 2: Send and retrieve events from Azure Event Hubs
 
+## Lab Scenario
+
 In this exercise, you create Azure Event Hubs resources and build a .NET console app to send and receive events using the **Azure.Messaging.EventHubs** SDK. You learn how to provision cloud resources, interact with Event Hubs, and clean up your environment when finished.
 
-Tasks performed in this exercise:
+## Lab Objectives
+In this lab, you will perform:
 
 * Task 1: Create Azure Event Hubs resources
 * Task 2: Create an Azure Event Hubs namespace and event hub
@@ -12,13 +15,13 @@ Tasks performed in this exercise:
 * Task 6: Add code to complete the application
 * Task 7: Sign into Azure and run the app
 
-This exercise takes approximately **30** minutes to complete.
+## Estimated Timing: 30 Minutes
 
 ### Task 1: Create Azure Event Hubs resources
 
 In this section of the exercise you create the needed resources in Azure with the Azure CLI.
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+1. In your browser navigate to the Azure portal 
 
 1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
 
@@ -30,18 +33,20 @@ In this section of the exercise you create the needed resources in Azure with th
    
     ![](./media/lab7-12---3.png)
 
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
+    >**Note:** If your Cloud Shell environment is already configured, you can skip this step and proceed to the next.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
      ![](./media/lab7-12-1.1.png)
 
 1. Many of the commands require unique names and use the same parameters. Creating some variables will reduce the changes needed to the commands that create resources. Run the following commands to create the needed variables. 
+    
     ```
     resourceGroup=PubSubEvents-<inject key="DeploymentID" enableCopy="false"/>
     location=<inject key="Region" enableCopy="false"/>
     namespaceName=eventhubsns<inject key="DeploymentID" enableCopy="false"/>
     ```
+    >**Note:** Copy the namespaceName: **eventhubsns<inject key="DeploymentID" enableCopy="false"/>** value into a Notepad file. You will use it in a later task.
 
 ### Task 2: Create an Azure Event Hubs namespace and event hub
 
@@ -91,6 +96,8 @@ To allow your app to send and receive messages, assign your Microsoft Entra user
         --scope $resourceID
     ```
 
+     ![](./media/lab7-e2-3.png)
+
 ### Task 4: Send and retrieve events with a .NET console application
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
@@ -110,6 +117,8 @@ Now that the needed resources are deployed to Azure the next step is to set up t
     dotnet new console
     ```
 
+    ![](./media/lab7-e2-4.png)
+
 1. Run the following commands to add the **Azure.Messaging.EventHubs** and **Azure.Identity** packages to the project.
 
     ```
@@ -121,7 +130,7 @@ Now it's time to replace the template code in the **Program.cs** file using the 
 
 ### Task 5: Add the starter code for the project
 
-1. Run the following command in the cloud shell to begin editing the application.
+1. Run the following command in the cloud shell to begin editing the application **(1)**.
 
     ```
     code Program.cs
@@ -138,7 +147,7 @@ Now it's time to replace the template code in the **Program.cs** file using the 
     
     // TO-DO: Replace YOUR_EVENT_HUB_NAMESPACE with your actual Event Hub namespace
     string namespaceURL = "YOUR_EVENT_HUB_NAMESPACE.servicebus.windows.net";
-    string eventHubName = "myEventHub"; 
+    string eventHubName = "myEventHub<inject key="DeploymentID" enableCopy="false"/>"; 
     
     // Create a DefaultAzureCredentialOptions object to exclude certain credentials
     DefaultAzureCredentialOptions options = new()
@@ -158,6 +167,8 @@ Now it's time to replace the template code in the **Program.cs** file using the 
     
     
     ```
+
+    ![](./media/lab7-e2--4.png)
 
 1. Press **ctrl+s** to save your changes.
 
@@ -206,6 +217,8 @@ In this section you add code to create the producer and consumer clients to send
     }
     ```
 
+     ![](./media/lab7-e2-5.png)
+
 1. Press **ctrl+s** to save your changes.
 
 1. Locate the **// CREATE A CONSUMER CLIENT AND RETRIEVE EVENTS** comment and add the following code directly after the comment. Be sure to review the comments in the code.
@@ -253,6 +266,8 @@ In this section you add code to create the producer and consumer clients to send
     }
     ```
 
+    ![](./media/lab7-e2-6.png)
+
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
 ### Task 7: Sign into Azure and run the app
@@ -267,13 +282,33 @@ In this section you add code to create the producer and consumer clients to send
 
     > **Note**: In most scenarios, just using *az login* will be sufficient. However, if you have subscriptions in multiple tenants, you may need to specify the tenant by using the *--tenant* parameter. See [Sign into Azure interactively using Azure CLI](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) for details.
 
-1. Start the application by running the following command:
+1. After running the az login command, select the **authentication link** shown in the Cloud Shell output and **copy the displayed code**.
+
+1. On the **Enter code to allow access** page, paste the copied code into the field and select **Next** to complete authentication.
+
+     ![](./media/lab7-12-14.png)
+
+1. When prompted to **Pick an account**, select your ODL_User account to proceed
+
+     ![](./media/lab7-12-15.png)
+
+1. On the **Are you trying to sign in to Microsoft Azure CLI?** page, select **Continue** to authorize the sign-in request.
+
+     ![](./media/lab7-12-16.png)
+
+1. Back in Cloud Shell, when the subscription selection appears, type **1** and press **Enter** to continue.
+
+     ![](./media/lab7-12-17.png)
+
+1. Start the application by running the following command, when prompted, press Enter to retrieve and print the events
 
     ```
     dotnet run
     ```
 
-    After a few seconds you should see output similar to the following example:
+     ![](./media/lab7-e2-7.png)
+
+ 1. After a few seconds you should see output similar to the following example:
     
     ```
     A batch of 3 events has been published.
@@ -285,6 +320,8 @@ In this section you add code to create the producer and consumer clients to send
     Retrieved event: Event 74
     Done retrieving events. Press Enter to exit...
     ```
+
+     ![](./media/lab7-e2-8.png)
 
 The application always sends three events to the hub, but it retrieves all events in the hub. If you run the application multiple times an increasing number of events are retrieved. The random numbers used for event creation help you identify different events.
 

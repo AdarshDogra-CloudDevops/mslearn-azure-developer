@@ -83,7 +83,7 @@ In this lab, you will perform:
 
 # Exercise 3: Create and deploy a Blazor app
 
-All steps in this exercise are performed in the Azure Cloud Shell.
+> All steps in this exercise are performed in the Azure Cloud Shell.
 
 ### Task 1: Create the Blazor application
 
@@ -97,53 +97,62 @@ All steps in this exercise are performed in the Azure Cloud Shell.
 
    ![](./media/A03.png)
 
-> **Note**: If Cloud Shell is currently set to **PowerShell**, switch to **Bash**.
+   > **Note**: If Cloud Shell is currently set to **PowerShell**, switch to **Bash**.
 
-   ![](./media/C23.png)
+      ![](./media/C23.png)
 
 2. Run the following commands to create a folder and move into it:
-```
-mkdir blazor
-cd blazor
-```
 
-3. Create a new Blazor app:
-```
-dotnet new blazor
-```
+   ```
+   mkdir blazor
+   cd blazor
+   ```
 
-4. Build the application:
-```
-dotnet build
-```
+3. Creates a new Blazor app:
+   ```
+   dotnet new blazor
+   ```
+
+4. Builds the application:
+   ```
+   dotnet build
+   ```
 
 ---
 
 ### Task 2: Publish and package the application
 
 1. Publish the application into a **publish** directory:
-```
-dotnet publish -c Release -o ./publish
-```
+   ```
+   dotnet publish -c Release -o ./publish
+   ```
 
 2. Create a `.zip` file of the published output:
-```
-cd publish
-zip -r ../app.zip .
-cd ..
-```
+   ```
+   cd publish
+   zip -r ../app.zip .
+   cd ..
+   ```
    ![](./media/C24.png)
 ---
 
 ### Task 3: Deploy the application to App Service
 
-Replace the placeholders with your actual App Service name and resource group:
+1. Run the following command to deploy the application, using the correct App Service name and resource group:
 
-```
-az webapp deploy --name YOUR-WEB-APP-NAME     --resource-group YOUR-RESOURCE-GROUP     --src-path ./app.zip
-```
+- Replace the placeholders with the names shown below:  
 
-Once deployment is complete, open the application using the **Default domain** link in the Web App **Overview** page.
+   - **Web App Name:** webapp-<inject key="DeploymentID" enableCopy="false"/>
+   - **Resource Group Name:** MonitoredAssets-<inject key="DeploymentID" enableCopy="false"/>
+
+      ```
+      az webapp deploy --name YOUR-WEB-APP-NAME \
+         --resource-group YOUR-RESOURCE-GROUP \
+         --src-path ./app.zip
+      ```
+
+2. Once the deployment is complete, open the application from the **Overview (1)** page copy the **Default domain (2)** link and open it in new tab .
+
 
    ![](./media/C25.png)
 
@@ -224,9 +233,15 @@ Enter:
 
 Run:
 
-```bash
-az webapp deploy --name webapp-1993963 --resource-group MonitoredAssets-1993963 --src-path ./app.zip
-```
+
+   - **Web App Name:** webapp-<inject key="DeploymentID" enableCopy="false"/>
+   - **Resource Group Name:** MonitoredAssets-<inject key="DeploymentID" enableCopy="false"/>
+
+      ```
+      az webapp deploy --name YOUR-WEB-APP-NAME \
+         --resource-group YOUR-RESOURCE-GROUP \
+         --src-path ./app.zip
+      ```
 </details>
 ---
 

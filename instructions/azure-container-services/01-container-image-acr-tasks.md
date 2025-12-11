@@ -5,6 +5,7 @@
 In this exercise, you build a container image from your application code and push it to Azure Container Registry using Azure CLI. You learn how to prepare your app for containerization, create an ACR instance, and store your container image in Azure.
 
 ## Lab Objectives
+
 In this lab, you will perform:
 
 * Task 1: Create an Azure Container Registry resource
@@ -18,7 +19,20 @@ In this lab, you will perform:
 
 ### Task 1: Create an Azure Container Registry resource
 
-1. In your browser navigate to the Azure portal [https://portal.azure.com](https://portal.azure.com); signing in with your Azure credentials if prompted.
+In this task, you will create an Azure Container Registry instance that will store and manage your container images.
+
+1. In the lab VM, click on the **Azure Portal icon** as shown below:
+
+    ![](./media/lab2-12-0.png)
+
+    - On the **Sign in to Microsoft Azure** tab, you will see the login screen. Enter your credentials:
+      
+        * **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+    
+    - Next, provide your password:
+
+        * **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
+
 
 1. On the Azure portal homepage, click the **\[>\_] Cloud Shell (1)** button located to the right of the **Copilot** tab at the top. This opens a new Cloud Shell session. In the **Welcome to Azure Cloud Shell** window, choose **Bash (2)**.
 
@@ -29,8 +43,6 @@ In this lab, you will perform:
 1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
    
     ![](./media/lab5-12-3.png)
-
-    > **Note**: If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 1. Run the following command to create a basic container registry. The registry name must be unique within Azure, and contain 5-50 numeric and lowercase characters. 
 
@@ -45,7 +57,7 @@ In this lab, you will perform:
 
 ### Task 2: Build and push an image from a Dockerfile
 
-Next, you build and push an image based on a Dockerfile.
+In this task, you will build a container image from a simple Dockerfile and push it directly to your Azure Container Registry using ACR Tasks.
 
 1. Run the following command to create the Dockerfile. The Dockerfile contains a single line that references the *hello-world* image hosted at the Microsoft Container Registry.
 
@@ -86,6 +98,8 @@ Next, you build and push an image based on a Dockerfile.
 
 ### Task 3: Verify the results
 
+In this task, you will verify that your image was successfully pushed by listing repositories and tags stored in your Azure Container Registry.
+
 1. Run the following command to list the repositories in your registry.
 
     ```bash
@@ -121,6 +135,8 @@ Next, you build and push an image based on a Dockerfile.
 
 ### Task 4: Run the image in the ACR
 
+In this task, you will run the container image directly from Azure Container Registry using the az acr run command to confirm the image works as expected.
+
 1. Run the *sample/hello-world:v1* container image from your container registry with the **az acr run** command. The following example uses **$Registry** to specify the registry where you run the command. 
 
     ```bash
@@ -131,3 +147,19 @@ Next, you build and push an image based on a Dockerfile.
     The **cmd** parameter in this example runs the container in its default configuration, but **cmd** supports other **docker run** parameters or even other **docker** commands. 
 
     ![](./media/lab5-12-9.png)
+
+## Summary
+
+In this lab, you:
+
+- Created an Azure Container Registry to store and manage container images
+
+- Built a container image from a Dockerfile and pushed it to your registry using ACR Tasks
+
+- Verified the uploaded image by listing repositories and tags in the registry
+
+- Ran the container image directly in Azure Container Registry to confirm successful execution
+
+## You have successfully completed the lab. Click on Next >>
+
+![](./media/next.png)

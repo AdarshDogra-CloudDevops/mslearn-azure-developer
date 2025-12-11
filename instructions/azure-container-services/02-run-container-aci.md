@@ -1,6 +1,7 @@
 ## Exercise 2: Deploy a container to Azure Container Instances using Azure CLI commands
 
 ## Lab Scenario
+
 In this exercise, you deploy and run a container in Azure Container Instances (ACI) using Azure CLI. You learn how to create a container group, specify container settings, and verify that your containerized application is running in the cloud.
 
 ## Lab Objectives
@@ -13,7 +14,7 @@ In this lab, you will perform:
 
 ### Task 1: Create and deploy a container
 
-You create a container by providing a name, a Docker image, and an Azure resource group to the **az container create** command. You expose the container to the Internet by specifying a DNS name label.
+In this task, you will create and deploy a container instance in Azure Container Instances by specifying its name, image, ports, and DNS label.
 
 1. Run the following command to create a DNS name used to expose your container to the Internet. Your DNS name must be unique, run this command from Cloud Shell to create a variable that holds a unique name.
 
@@ -42,9 +43,9 @@ Move to the next section after the **az container create** command is finished.
 
 ### Task 2: Verify the container is running
 
-You can check the containers build status with the **az container show** command. 
+In this task, you will verify that your container is running by checking its provisioning status and accessing the container through its fully qualified domain name.
 
-1. Run the following command to check the provisioning status of the container you created. Replace **myResourceGroup** with the value you used earlier.
+1. Run the following command to check the provisioning status of the container you created. 
 
     ```bash
     az container show --resource-group ConfidentialStack-<inject key="DeploymentID" enableCopy="false"/> \
@@ -68,3 +69,15 @@ You can check the containers build status with the **az container show** command
 1. From a browser, navigate to your container's FQDN to see it running. You may get a warning that the site isn't safe.
 
      ![](./media/lab5-e2-3.png)
+
+## Summary
+
+In this lab, you:
+
+- Created and deployed a container instance in Azure Container Instances using the Azure CLI
+
+- Verified the container’s provisioning status and accessed its fully qualified domain name to confirm it was running successfully
+
+## You have successfully completed the lab. Click on Next >>
+
+![](./media/next.png)

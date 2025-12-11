@@ -21,7 +21,7 @@ In this lab, you will perform:
 
 ### Task 1: Create Azure Event Grid resources
 
-In this section of the exercise you create the needed resources in Azure with the Azure CLI.
+In this task, you will create the required Azure Event Grid resources, including a custom topic, using the Azure CLI.
 
 1. In the lab VM, click on the **Azure Portal icon** as shown below:
 
@@ -44,8 +44,6 @@ In this section of the exercise you create the needed resources in Azure with th
 1. In the **Getting started** window, ensure **No storage account required (1)** is selected. From the **Subscription** drop-down, choose **Default subscription (2)**, then click **Apply (3)**.
    
     ![](./media/lab7-12---3.png)
-
-    > **Note:** If you have previously created a cloud shell that uses a *PowerShell* environment, switch it to ***Bash***.
 
 1. In the cloud shell toolbar, in the **Settings** menu, select **Go to Classic version** (this is required to use the code editor).
 
@@ -76,7 +74,7 @@ In this section of the exercise you create the needed resources in Azure with th
 
 ### Task 2: Create a message endpoint
 
-Before subscribing to the custom topic, we need to create the endpoint for the event message. Typically, the endpoint takes actions based on the event data. The following script uses a prebuilt web app that displays the event messages. The deployed solution includes an App Service plan, an App Service web app, and source code from GitHub.
+In this task, you will deploy a message endpoint using a prebuilt web app that will receive and display events sent to your Event Grid topic.
 
 1. Run the following commands to create a message endpoint. The **echo** command will display the site URL for the endpoint.
 
@@ -103,7 +101,7 @@ Before subscribing to the custom topic, we need to create the endpoint for the e
 
 ### Task 3: Subscribe to the topic
 
-You subscribe to an Event Grid topic to tell Event Grid which events you want to track and where to send those events. 
+In this task, you will subscribe the web app endpoint to your Event Grid topic so it can receive validation and custom events. 
 
 1. Subscribe to a topic using the **az eventgrid event-subscription create** command. The following script retrieves the subscription ID from your account and uses it in the creation of the event subscription.
 
@@ -126,7 +124,7 @@ You subscribe to an Event Grid topic to tell Event Grid which events you want to
 
 ### Task 4: Send an event with a .NET console application
 
-Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
+In this task, you will create a .NET console application that will be used to send custom events to your Event Grid topic.
 
 >**Tip:** Resize the cloud shell to display more information, and code, by dragging the top border. You can also use the minimize and maximize buttons to switch between the cloud shell and the main portal interface.
 
@@ -156,7 +154,7 @@ Now that the needed resources are deployed to Azure the next step is to set up t
 
 ### Task 5: Configure the console application
 
-In this section you retrieve the topic endpoint and access key so they can be added to a **.env** file to hold those secrets.
+In this task, you will configure the console application by retrieving the topic endpoint and access key, and storing them in a .env file.
 
 1. Run the following commands to retrieve the URL and access key for the topic you created earlier. Be sure to record these values.
 
@@ -190,6 +188,8 @@ In this section you retrieve the topic endpoint and access key so they can be ad
 Now it's time to replace the template code in the **Program.cs** file using the editor in the cloud shell.
 
 ### Task 6: Add the code for the project
+
+In this task, you will replace the default Program.cs code with logic that sends events to your Event Grid topic using the Event Grid SDK.
 
 1. Run the following command in the cloud shell to begin editing the application **(1)**.
 
@@ -247,6 +247,8 @@ Now it's time to replace the template code in the **Program.cs** file using the 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
 ### Task 7: Sign into Azure and run the app
+
+In this task, you will authenticate with Azure in Cloud Shell and run the console application to send an event to your subscribed endpoint.
 
 1. In the cloud shell command-line pane, enter the following command to sign into Azure.
 

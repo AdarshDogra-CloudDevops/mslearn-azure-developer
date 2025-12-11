@@ -19,10 +19,10 @@ In this lab, you will perform:
 
 1. Select the **+ Create a resource** located in the **Azure Services** heading near the top of the homepage. 
 
-![](./media/01/A01.png)
+    ![](./media/01/C1.png)
 
-3. In the **Search the Marketplace** search bar, enter *web app* and press **Enter** to start searching.
-4. In the Web App tile, select the **Create** drop-down and then select **Web App**.
+3. In the **Search the Marketplace** search bar, enter **web app (1)** and press **Enter** to start searching.
+4. In the Web App tile, select the **Create (2)** drop-down and then select **Web App (3)**.
 
     ![Screenshot of the Web App tile.](./media/01/C2.png)
 
@@ -31,8 +31,8 @@ In this lab, you will perform:
     | Setting | Action |
     |--------|--------|
     | **Subscription** | Retain the default value. |
-    | **Resource group** | Select **Create new**, enter `rg-WebApp`, and then select OK. You may also select an existing resource group. |
-    | **Name** | Enter a unique name, for example **your-initials-containerwebapp**. Replace *your-initials* with your initials or another value. The name must be globally unique. |
+    | **Resource group** |  **ManagedPlatform-<inject key="DeploymentID" enableCopy="false"/>** |
+    | **Name** | Enter a unique name **containerwebapp-<inject key="DeploymentID" enableCopy="false"/>** |
     | **Slider under Name** | Select the slider to turn it off (if visible). |
     | **Publish** | Select **Container**. |
     | **Operating System** | Ensure **Linux** is selected. |
@@ -40,50 +40,40 @@ In this lab, you will perform:
     | **Linux Plan** | Retain the default value. |
     | **Pricing plan** | Select the drop-down and choose **Free F1**. |
 
----
+    ![](./media/01/D1.png)
 
-![](./media/01/D1.png)
+6. Navigate to the **Container** tab, enter the required details, and then select **Review + create (6)**.
 
-## Task 2: Configure the Container Settings
+    | Setting | Action |
+    |--------|--------|
+    | **Sidecar support** | Off (1)|
+    | **Image Source** | Other container registries (2)|
+    | **Access Type** | Public (3)|
+    | **Registry server URL** | `mcr.microsoft.com/k8se` (4)|
+    | **Image and Tag** | `quickstart:latest` (5) |
+    | **Startup Command** | Leave blank |
 
-Navigate to the **Container** tab and enter the following details:
+    ![](./media/01/D2.png)
 
-| Setting | Action |
-|--------|--------|
-| **Sidecar support** | Off |
-| **Image Source** | Other container registries |
-| **Access Type** | Public |
-| **Registry server URL** | `mcr.microsoft.com/k8se` |
-| **Image and Tag** | `quickstart:latest` |
-| **Startup Command** | Leave blank |
+1. Verify your selections, and then select **Create** to deploy the web app.
 
----
-![](./media/01/D2.png)
+    ![](./media/01/D3.png)
 
+2. Wait until deployment completes and select **Go to resource**.
 
-## Task 3: Review and Create
-
-1. Select the **Review + create** tab.  
-2. Review your selections.  
-3. Select **Create** to deploy the web app.  
-
-![](./media/01/D3.png)
-
-4. Wait until deployment completes and select **Go to resource**.
-
-![](./media/01/dep01.png)
+    ![](./media/01/dep01.png)
 
 ---
 
-## Task 4: View the Web App
+## Task 3: View the Web App
 
 1. In the App Service overview page, select the link next to **Default domain**.  
 
-![](./media/01/D09.png)
+    ![](./media/01/D09.png)
 
 2. A new browser tab will open showing your deployed containerized app.
 
-![](./media/01/D100.png)
+    ![](./media/01/D100.png)
 
 > **Note:** It may take a few minutes for the container to fully load.
 

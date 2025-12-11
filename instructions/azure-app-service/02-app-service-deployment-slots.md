@@ -40,79 +40,103 @@ In this section you download the sample app, set variables to simplify commands,
 
 ## Task 2: Set Variables
 
+1. Run the following commands to set the required variables for your resource group and web app, and copy the generated app name into Notepad as it will be needed in later tasks.
+
     ```bash
     resourceGroup=rg-mywebapp
     appName=mywebapp$RANDOM
     echo $appName
     ```
 
-![](./media/02/D5.png)
+    ![](./media/02/D5.png)
 
 ## Task 3: Deploy to App Service Using `az webapp up`
 
-```bash
-cd html-docs-hello-world
-az webapp up -g $resourceGroup -n $appName --sku P0V3 --html
-```
-
-After deployment completes:
-
-1. Search for the **mywebapp** using its name in the portal.
-
-![](./media/02/D06.png)
-
-2. Open the app via the **Default domain** link.
-
-    ![](./media/02/dep01.png)
+1. Run the following commands to navigate into the project directory and deploy the web app to Azure.
 
 
+    ```bash
+    cd html-docs-hello-world
+    az webapp up -g $resourceGroup -n $appName --sku P0V3 --html
+    ```
+
+    > After the deployment completes, follow the steps below to access your web app:
+
+
+2. Search for your **mywebapp** by entering its name in the Azure portal search bar.  
+
+   ![](./media/02/D06.png)
+
+3. Open the application by selecting the **Default domain** link on the Overview page. 
+
+   ![](./media/02/D90.png)
+
+4. The web app URL will appear similar to the example shown below:  
+
+   ![](./media/02/D100.png)
 ---
 
 # Exercise 2: Deploy Updated Code to a Deployment Slot
 
 ## Task 1: Create the Staging Slot
 
-```bash
-az webapp deployment slot create -n $appName -g $resourceGroup --slot staging
-```
+1. Run the following command to create a **staging** deployment slot for your web app:
 
-View the newly created slot:
+    ```bash
+    az webapp deployment slot create -n $appName -g $resourceGroup --slot staging
+    ```
 
-- - In the Azure portal, open your **Web App**, then select **Deployment slots** from the left panel.
+2. After the slot is created, verify it in the portal:
 
+    - In the Azure portal, open your **Web App**, then on the Overview page select the **Deployment (1)** dropdown and choose **Deployment slots (2)** to view the newly created **staging slot (3)**.
 
+        ![](./media/02/D70.png)
 
 ## Task 2: Modify Code and Deploy to Staging
 
-1. Navigate back to CL and Open the HTML file by running the below code :
+1. Navigate back to Cloud Shell and open the HTML file by running:
 
     ```bash
     code index.html
     ```
 
-2. Change:
+2. Update the heading text:
 
-    `Azure App Service - Sample Static HTML Site`  
-    to  
-    `Azure App Service Staging Slot`
+    Replace:
 
-3. Save (**Ctrl+S**) and exit (**Ctrl+Q**).
+    ```
+    Azure App Service - Sample Static HTML Site
+    ```
 
-4. Create a ZIP package:
+    With:
 
-```bash
-zip -r stagingcode.zip .
-```
+    ```
+    Azure App Service Staging Slot
+    ```
 
-5. Deploy to staging:
+3. Save your changes (**Ctrl + S**) and exit the editor (**Ctrl + Q**).
 
-```bash
-az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --slot staging
-```
+4. Create a ZIP package containing the updated site:
+
+    ```bash
+    zip -r stagingcode.zip .
+    ```
+
+5. Deploy the ZIP package to the **staging** slot:
+
+    ```bash
+    az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --slot staging
+    ```
 
 6. Open the staging slot:
 
-- In the Azure portal, go to **Deployment slots**, select **staging**, and open the **Default domain** link.
+- In the Azure portal, select **Deployment slots**, choose **staging**, and open the **Default domain** link to view the updated application.
+
+    ![](./media/02/D011.png)
+
+7. The web app URL will appear similar to the example shown below:  
+
+    ![](./media/02/D012.png)
 
 ---
 
@@ -120,18 +144,18 @@ az webapp deploy -g $resourceGroup -n $appName --src-path ./stagingcode.zip --sl
 
 1. Select your **Web App**, then in the left panel open the **Deployment (1)** dropdown, go to **Deployment slots (2)**, and select **Swap (3)**. 
 
-![](./media/02/D07.png)
+    ![](./media/02/D07.png)
 
 2. Set **Source** to **staging (1)**.  
 3. Set **Target** to **production (2)**.  
 4. Select **Start Swap (3)** to begin the process.  
 5. Monitor the swap progress in the **Notifications** panel.  
 
-![](./media/02/D08.png)
+    ![](./media/02/D08.png)
 
 6. Open the production site and verify that the updated heading appears (refresh the page if needed).
 
-![](./media/02/D100.png)
+    ![](./media/02/D100.png)
 
 ---
 

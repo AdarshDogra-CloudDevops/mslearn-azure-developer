@@ -1,4 +1,4 @@
-# Lab 1: Import and Configure an API with Azure API Management
+# Getting Started with Lab 1: Import and Configure an API with Azure API Management
 
 Welcome to **Lab 1: Import and Configure an API with Azure API Management (APIM)**.  
 This Getting Started page provides everything you need before beginning the exercises, including environment access instructions, navigation tips, and support details.
@@ -110,3 +110,4 @@ Click **Next** at the bottom-right corner to begin the first exercise.
 
 
 ## Happy Learning!
+

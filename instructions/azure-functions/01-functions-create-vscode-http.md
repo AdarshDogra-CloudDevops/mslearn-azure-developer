@@ -19,10 +19,16 @@ In this lab, you will perform:
 ## Task 1: Create a new Function App project
 
 1. Open **Visual Studio Code**.  
-2. Install **C# Dev Kit** and **Azure Functions** extensions.  
-3. Press **F1** → Run **Azure Functions: Create New Project...**  
-4. Select an empty folder.  
-5. Provide the following values during setup:
+2. Install **C# Dev Kit** and **Azure Functions** extensions.
+3. Open the Terminal and run the command below:
+
+    ```
+    choco upgrade azure-functions-core-tools
+    ```
+
+4. Press **F1** → Run **Azure Functions: Create New Project...**  
+5. Select an empty folder.  
+6. Provide the following values during setup:
 
     | Prompt | Action |
     |--|--|
@@ -33,8 +39,8 @@ In this lab, you will perform:
     | Namespace | `My.Function` |
     | Authorization level | **Anonymous** |
 
-6. Choose **Open in current window**.  
-7. If prompted with *"Do you trust the authors?"* → Select **Yes**.
+7. Choose **Open in current window**.  
+8. If prompted with *"Do you trust the authors?"* → Select **Yes**.
 
 ---
 

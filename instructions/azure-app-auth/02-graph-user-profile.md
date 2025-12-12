@@ -237,3 +237,5 @@ In this lab, you:
 - Retrieved and displayed your user profile information through the Microsoft Graph API
 
 ## You have successfully completed the lab.
+
+

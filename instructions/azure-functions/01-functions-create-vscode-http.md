@@ -30,6 +30,7 @@ In this lab, you will perform:
     ```
     choco upgrade azure-functions-core-tools
     ```
+> **Note:** The upgrade process might take 5–10 minutes to complete, depending on your system and network speed.
 
 5. Press **F1** → Run **Azure Functions: Create New Project...**  
 6. Select an empty folder.  

@@ -38,6 +38,9 @@ In this task, you will register a new application in Microsoft Entra ID and reco
 1. In the **Essentials** section of the **Overview** page record the **Application (client) ID (1)** and the **Directory (tenant) ID (2)**. The information is needed for the application.
 
     ![](./media/lab2-e2-2.png)
+
+> **Congratulations** on completing the task! Now, it's time to validate it.
+<validation step="53f4f621-04d5-4b8e-bcbe-2ba92f7e63ff" />
  
 ### Task 2: Create a .NET console app to send and receive messages
 

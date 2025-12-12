@@ -54,6 +54,9 @@ In this task, you will create a new app registration in Microsoft Entra ID and r
 1. In the **Essentials** section of the **Overview** page record the **Application (client) ID (1)** and the **Directory (tenant) ID (2)**. The information is needed for the application.
 
     ![](./media/lab2-12-4.png)
+
+> **Congratulations** on completing the task! Now, it's time to validate it.
+<validation step="0b912b02-c883-4643-9b6f-c7f200323136" />
  
 ### Task 2: Create a .NET console app to acquire a token
 

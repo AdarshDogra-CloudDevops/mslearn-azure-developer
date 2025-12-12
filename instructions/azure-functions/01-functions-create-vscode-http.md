@@ -113,7 +113,7 @@ These values will be reused by the commands that follow.
  
     ```bash
     RESOURCE_GROUP=Serverless-<inject key="DeploymentID" enableCopy="false"/>
-    LOCATION=funcplan<inject key="Region" enableCopy="false"/>
+    LOCATION=<inject key="Region" enableCopy="false"/>
     FUNCTIONAPP_NAME=myfunctionapp<inject key="DeploymentID" enableCopy="false"/>
     STORAGE_NAME=funcstor<inject key="DeploymentID" enableCopy="false"/>
     PLAN_NAME=funcplan<inject key="DeploymentID" enableCopy="false"/>

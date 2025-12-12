@@ -1,4 +1,4 @@
-# Getting Started with Lab 03: Monitor an Application with Autoinstrumentation
+# Lab 03: Monitor an Application with Autoinstrumentation
 
 Welcome to **Lab 03: Monitor an Application with Autoinstrumentation**.  
 This Getting Started page provides essential environment setup instructions, navigation guidance, and support information before you begin the hands‑on exercises.
@@ -107,5 +107,6 @@ If you encounter issues with login, VM, Cloud Shell, or Azure resources, reach o
 Select **Next** at the bottom‑right corner to begin **Exercise 1**.
 
 ![](media/G10.png)
+
 
 ## Happy Learning!

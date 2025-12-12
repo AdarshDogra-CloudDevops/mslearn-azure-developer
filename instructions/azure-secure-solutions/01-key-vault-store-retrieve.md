@@ -56,6 +56,8 @@ In this section of the exercise you create the needed resources in Azure with th
 
     >**Note**:  Note down the name of Key Vault you created. You need it later in the exercise.
 
+<validation step="f9c5f427-4ea7-4d62-91b7-7cc85096f2a3" />
+
 # Task 2: Assign a role to your Microsoft Entra user name
 
 To create and retrieve a secret, assign your Microsoft Entra user to the **Key Vault Secrets Officer** role. This gives your user account permission to set, delete, and list secrets. In a typical scenario you may want to separate the create/read actions by assigning the **Key Vault Secrets Officer** to one group, and **Key Vault Secrets User** (can get and list secrets) to another.

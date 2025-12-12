@@ -81,6 +81,8 @@ In this section of the exercise you create the needed resources in Azure with th
 
      ![](./media/lab7-e3-3.png)
 
+<validation step="931b1a90-573b-479e-b0c6-50e28037cc43" />
+
 ### Task 3: Assign a role to your Microsoft Entra user name
 
 To allow your app to send and receive messages, assign your Microsoft Entra user to the **Azure Service Bus Data Owner** role at the Service Bus namespace level. This gives your user account permission to manage and access queues and topics using Azure RBAC. Perform the following steps in the cloud shell.

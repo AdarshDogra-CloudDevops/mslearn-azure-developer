@@ -1,6 +1,7 @@
 # Lab 1: Import and configure an API with Azure API Management
 
 ## Lab Scenario
+
 In this exercise, you create an Azure API Management instance, import an OpenAPI specification backend API, configure the API settings including the web service URL and subscription requirements, and test the API operations to verify they work correctly.
 
 ## Lab Objectives
@@ -55,8 +56,10 @@ In this section of the exercise, you create a resource group and an Azure Storag
     ```
      ![](./media/A04.png)
 
-> **Note:** The operation should complete within approximately five minutes.
+    > **Note:** The operation should complete within approximately five minutes.
 ---
+
+<validation step="025b0fde-7447-43a3-ba91-95512da20179" />
 
 # Exercise 2: Import a Backend API
 
@@ -83,12 +86,14 @@ In this section of the exercise, you create a resource group and an Azure Storag
 # Exercise 3: Test the API
 
 1. Select **Test (1)**.
+
 2. Search for **Finds Pets by status (2)** under **Search Operations** and select **Finds Pets by status (3)**.
+
 3. Select **Send (4)**. Response should be **200 OK (5)**.
 
-![](./media/A11.png)
+    ![](./media/A11.png)
 
-> **Note:** Modify **status** parameter to test different outputs.
+    > **Note:** Modify **status** parameter to test different outputs.
 
 ---
 # Summary

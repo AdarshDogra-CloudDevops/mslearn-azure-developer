@@ -65,8 +65,6 @@ In this lab, you will perform:
 
     ![](./media/01/dep01.png)
 
----
-
 ## Task 2: View the Web App
 
 1. In the App Service overview page, select the link next to **Default domain**.  
@@ -79,7 +77,7 @@ In this lab, you will perform:
 
     > **Note:** It may take a few minutes for the container to fully load.
 
----
+<validation step="74d7f8c8-43e6-4abf-a577-cbb980fe9ab2" />
 
 # Summary
 

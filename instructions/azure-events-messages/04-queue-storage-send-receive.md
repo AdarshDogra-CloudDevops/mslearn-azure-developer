@@ -68,6 +68,8 @@ In this section of the exercise you create the needed resources in Azure with th
 
      ![](./media/lab7-e3-16.png)
 
+<validation step="f0afc17f-041b-4887-a059-a53be0144fb1" />
+
 ### Task 2: Assign a role to your Microsoft Entra user name
 
 To allow your app to send and receive messages, assign your Microsoft Entra user to the **Storage Queue Data Contributor** role. This gives your user account permission to create queues, and send/receive messages using Azure RBAC. Perform the following steps in the cloud shell.

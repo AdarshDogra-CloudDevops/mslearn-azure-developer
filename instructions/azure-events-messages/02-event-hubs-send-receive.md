@@ -69,6 +69,7 @@ An Azure Event Hubs namespace is a logical container for event hub resources wit
 
     ![](./media/lab7-e2-2.png)
 
+<validation step="b16fc420-8882-4ba2-8cbb-ab3a31718604" />
 
 ### Task 3: Assign a role to your Microsoft Entra user name
 

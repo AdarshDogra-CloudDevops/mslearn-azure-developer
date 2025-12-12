@@ -65,7 +65,7 @@ In this lab, you will perform:
 
     ![](./media/C4.png)
 
----
+<validation step="7f755203-93a5-4792-b097-4e6048291dd8" />
 
 # Exercise 2: Configure instrumentation settings
 

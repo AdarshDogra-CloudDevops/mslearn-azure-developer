@@ -30,67 +30,67 @@ In this lab, you will perform:
 
 5. Create variables:
 
-```
-resourceGroup=myResourceGroup
-accountName=cosmosexercise$RANDOM
-```
+    ```
+    resourceGroup=myResourceGroup
+    accountName=cosmosexercise$RANDOM
+    ```
 
 6. Create the Cosmos DB account:
 
-```
-az cosmosdb create --name $accountName --resource-group $resourceGroup
-```
+    ```
+    az cosmosdb create --name $accountName --resource-group $resourceGroup
+    ```
 
 7. Retrieve the endpoint:
 
-```
-az cosmosdb show --name $accountName --resource-group $resourceGroup --query "documentEndpoint" --output tsv
-```
+    ```
+    az cosmosdb show --name $accountName --resource-group $resourceGroup --query "documentEndpoint" --output tsv
+    ```
 
 8. Retrieve the primary key:
 
-```
-az cosmosdb keys list --name $accountName --resource-group $resourceGroup --query "primaryMasterKey" --output tsv
-```
-![](./media/E2.png)
+    ```
+    az cosmosdb keys list --name $accountName --resource-group $resourceGroup --query "primaryMasterKey" --output tsv
+    ```
+    ![](./media/E2.png)
 ---
 
 ### Task 2: Create a .NET console app and add required implementation code
 
 1. Create project folder:
 
-```
-mkdir cosmosdb
-cd cosmosdb
-```
+    ```
+    mkdir cosmosdb
+    cd cosmosdb
+    ```
 
 2. Create the .NET console app:
 
-```
-dotnet new console
-```
+    ```
+    dotnet new console
+    ```
 
 3. Add required packages:
 
-```
-dotnet add package Microsoft.Azure.Cosmos --version 3.*
-dotnet add package Newtonsoft.Json --version 13.*
-dotnet add package dotenv.net
-```
+    ```
+    dotnet add package Microsoft.Azure.Cosmos --version 3.*
+    dotnet add package Newtonsoft.Json --version 13.*
+    dotnet add package dotenv.net
+    ```
 
 4. Create `.env` file:
 
-```
-touch .env
-code .env
-```
+    ```
+    touch .env
+    code .env
+    ```
 
-Add:
+    Add:
 
-```
-DOCUMENT_ENDPOINT="YOUR_DOCUMENT_ENDPOINT"
-ACCOUNT_KEY="YOUR_ACCOUNT_KEY"
-```
+    ```
+    DOCUMENT_ENDPOINT="YOUR_DOCUMENT_ENDPOINT"
+    ACCOUNT_KEY="YOUR_ACCOUNT_KEY"
+    ```
 
 5. Replace code in **Program.cs** with the template code and add required implementation blocks.
 
@@ -257,21 +257,23 @@ Sample output:
 
 1. Go to **Azure Portal** and open the Resource Group **CosmosDB-<inject key="DeploymentID" enableCopy="false"/> (1)**.
 
-![](./media/E10.png)
+    ![](./media/E10.png)
 
 2. In the resource group, select the **Azure Cosmos DB account** that was created **(2)**.
 
-![](./media/E11.png)
+    ![](./media/E11.png)
 
 3. Open **Data Explorer (3)**.
 
-![](./media/E12.png)
+    ![](./media/E12.png)
 
 4. Under **myDatabase (4)**, expand the dropdown, select **myContainer (5)**, then open **Items (6)** — you will see the created result **(7)**.
 
-![](./media/E13.png)
+    ![](./media/E13.png)
 
----
+<validation step="6035a827-10fe-4abe-9c5f-af88966b9ba3" />
+
+
 ## Summary
 You successfully:
 - Created a Cosmos DB account  

@@ -60,6 +60,7 @@ In this section of the exercise you create the needed resources in Azure with th
 
     >**NOTE:** If there is an issue creating the AppConfig Resource due to quota restrictions using the **Free** SKU value, please use **Developer** instead.
     
+<validation step="a8e4aaff-e268-4b39-9026-1f5e043dbed5" />
 
 ### Task: 2 Assign a role to your Microsoft Entra user name
 

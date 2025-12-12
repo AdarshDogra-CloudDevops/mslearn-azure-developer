@@ -74,7 +74,8 @@ In this section you download the sample app, set variables to simplify commands,
 4. The web app URL will appear similar to the example shown below:  
 
    ![](./media/02/D100.png)
----
+
+<validation step="00206e92-d4d2-4fef-a336-68f6f444ab9a" />
 
 # Exercise 2: Deploy Updated Code to a Deployment Slot
 

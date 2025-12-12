@@ -110,20 +110,13 @@ In this task, you will create the required Azure resources for deploying your Fu
 
 1. You first define environment variables that store the names and locations for all resources used in this lab.  
 These values will be reused by the commands that follow.
-
-- Replace the names with the values below:
-   - RESOURCE_GROUP="Serverless-<inject key="DeploymentID" enableCopy="false"/>"
-    - LOCATION="eastus"
-   - FUNCTIONAPP_NAME="myfunctionapp<inject key="DeploymentID" enableCopy="false"/>"
-   - STORAGE_NAME="funcstor<inject key="DeploymentID" enableCopy="false"/>"
-   - PLAN_NAME="funcplan<inject key="DeploymentID" enableCopy="false"/>"
  
     ```bash
-    RESOURCE_GROUP="Serverless-<inject key="DeploymentID" enableCopy="false"/>"
-    LOCATION="funcplan<inject key="Region" enableCopy="false"/>"
-    FUNCTIONAPP_NAME="myfunctionapp<inject key="DeploymentID" enableCopy="false"/>"
-    STORAGE_NAME="funcstor<inject key="DeploymentID" enableCopy="false"/>"
-    PLAN_NAME="funcplan<inject key="DeploymentID" enableCopy="false"/>"
+    RESOURCE_GROUP=Serverless-<inject key="DeploymentID" enableCopy="false"/>
+    LOCATION=funcplan<inject key="Region" enableCopy="false"/>
+    FUNCTIONAPP_NAME=myfunctionapp<inject key="DeploymentID" enableCopy="false"/>
+    STORAGE_NAME=funcstor<inject key="DeploymentID" enableCopy="false"/>
+    PLAN_NAME=funcplan<inject key="DeploymentID" enableCopy="false"/>
     ```
 
 2. Create a Storage Account required by the Function App to store logs and runtime metadata.

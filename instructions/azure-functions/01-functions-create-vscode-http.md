@@ -111,7 +111,7 @@ In this task, you will create the required Azure resources for deploying your Fu
 1. You first define environment variables that store the names and locations for all resources used in this lab.  
 These values will be reused by the commands that follow.
 
-- Replace the names with the below values :
+- Replace the names with the values below:
    - RESOURCE_GROUP="Serverless-<inject key="DeploymentID" enableCopy="false"/>"
     - LOCATION="eastus"
    - FUNCTIONAPP_NAME="myfunctionapp<inject key="DeploymentID" enableCopy="false"/>"

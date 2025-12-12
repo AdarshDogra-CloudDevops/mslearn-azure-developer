@@ -1,6 +1,6 @@
-# Getting Started with Lab 1: Import and Configure an API with Azure API Management
+# Lab 10: Create Blob Storage Resources with the .NET Client Library
 
-Welcome to **Lab 1: Import and Configure an API with Azure API Management (APIM)**.  
+Welcome to **Lab 10: Create Blob Storage Resources with the .NET Client Library**.  
 This Getting Started page provides everything you need before beginning the exercises, including environment access instructions, navigation tips, and support details.
 
 ---
@@ -9,12 +9,13 @@ This Getting Started page provides everything you need before beginning the exer
 
 In this lab, you will:
 
-- Create an Azure API Management (APIM) instance  
-- Import an API using an OpenAPI specification  
-- Configure API backend settings  
-- Test API operations  
+- Create an Azure Storage account  
+- Build a .NET console application  
+- Add authentication using DefaultAzureCredential  
+- Create a container, upload a blob, list blobs, and download a blob programmatically  
+- Verify results using the Azure portal  
 
-**Estimated Duration:** 20 minutes
+**Estimated Duration:** 30 minutes
 
 ---
 
@@ -68,25 +69,19 @@ To zoom in/out of the environment view, use the **A↕ 100%** button near the ti
 
 Follow these steps to begin working in Azure:
 
-1. On your VM desktop, click the **Azure Portal** icon:
+1. On your VM desktop, click the **Azure Portal** icon:  
+   ![](media/G6.png)
 
-     ![](media/G6.png)
-
-2. Enter your credentials:
-
-   - **Email/Username:** `<inject key="AzureAdUserEmail"></inject>`
-
+2. Enter your credentials:  
+   - **Email/Username:** `<inject key="AzureAdUserEmail"></inject>`  
      ![](media/G7.png)
 
-3. Enter your password:
-
-   - **Password:** `<inject key="AzureAdUserPassword"></inject>`
-
+3. Enter your password:  
+   - **Password:** `<inject key="AzureAdUserPassword"></inject>`  
      ![](media/G8.png)
 
-4. If prompted to **Stay signed in**, select **No**.
-
-      ![](media/G9.png)
+4. If prompted to **Stay signed in**, select **No**.  
+   ![](media/G9.png)
 
 ---
 
@@ -94,7 +89,7 @@ Follow these steps to begin working in Azure:
 
 CloudLabs offers **24/7 support** for all learners.
 
-**Learner Support:**
+**Learner Support:**  
 - Email: cloudlabs-support@spektrasystems.com  
 - Live Chat: https://cloudlabs.ai/labs-support  
 
@@ -104,10 +99,10 @@ If you face login, VM, or Azure issues, reach out anytime.
 
 ## Move to the Next Page
 
-Click **Next** at the bottom-right corner to begin the first exercise.
+Click **Next** at the bottom-right corner to begin the first exercise.  
 
-   ![](media/G10.png)
+![Next](media/G10.png)
 
+---
 
 ## Happy Learning!
-

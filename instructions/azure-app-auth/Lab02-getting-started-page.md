@@ -1,4 +1,4 @@
-# Getting Started with Lab 02: Implement Interactive Authentication & Microsoft Graph Integration
+# Lab 02: Implement Interactive Authentication & Microsoft Graph Integration
 
 Welcome to **Lab 02**, which contains two modules focusing on authentication and Microsoft Graph integration using .NET.  
 This Getting Started page provides the required environment setup, access instructions, navigation guidance, and support information.
@@ -113,5 +113,6 @@ For any VM, login, or Azure environment issues, feel free to reach out at any ti
 Select **Next** at the bottom-right corner to begin **Module 1**.
 
 ![](media/G10.png)
+
 
 ## Happy Learning!

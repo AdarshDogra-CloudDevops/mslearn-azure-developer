@@ -5,13 +5,18 @@
         "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-app-auth",
         "Files": [
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-auth/01-msal-interactive-auth.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-auth/Lab02-getting-started-page.md",
                 "Order": 1
             },
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-auth/02-graph-user-profile.md",
                 "Order": 2
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-app-auth/02-graph-user-profile.md",
+                "Order": 3
             }
+
         ]
     }
 ]

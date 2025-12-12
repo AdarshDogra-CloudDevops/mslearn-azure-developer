@@ -5,8 +5,12 @@
         "BaseURL": "https://github.com/CloudLabs-MOC/mslearn-azure-developer/tree/prod/instructions/azure-cosmos-db",
         "Files": [
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-cosmos-db/01-comosdb-create-resources-sdk.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-cosmos-db/Lab06-getting-started-page.md",
                 "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-cosmos-db/01-comosdb-create-resources-sdk.md",
+                "Order": 2
             }
         ]
     }

@@ -1,4 +1,4 @@
-# Getting Started with Lab 08: Create an Azure Function with Visual Studio Code
+# Lab 08: Create an Azure Function with Visual Studio Code
 
 Welcome to **Lab 08: Create an Azure Function with Visual Studio Code**.  
 This Getting Started page provides everything you need before beginning the exercises, including environment access instructions, navigation tips, and support details.

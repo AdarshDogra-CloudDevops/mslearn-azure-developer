@@ -63,6 +63,11 @@ In this task, you will deploy a containerized application into your Container Ap
 
     ![](./media/lab5-e3-3.png)
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - If you receive a success message, you can proceed to the next task.
+
+<validation step="31b12d09-bb81-4d99-bad5-4533168f612a" />
+
 ## Summary
 
 In this lab, you:

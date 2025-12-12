@@ -55,6 +55,11 @@ In this task, you will create an Azure Container Registry instance that will sto
 
      > **Note:** The command creates a *Basic* registry, a cost-optimized option for developers learning about Azure Container Registry.
 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - If you receive a success message, you can proceed to the next task.
+
+<validation step="dd962eb8-d886-4bb8-a640-e9bf11f0668a" />
+
 ### Task 2: Build and push an image from a Dockerfile
 
 In this task, you will build a container image from a simple Dockerfile and push it directly to your Azure Container Registry using ACR Tasks.

@@ -39,7 +39,10 @@ In this task, you will create and deploy a container instance in Azure Container
 
      >**Note:** In the previous command, **$DNS_NAME_LABEL** specifies your DNS name. The image name, **mcr.microsoft.com/azuredocs/aci-helloworld**, refers to a Docker image that runs a basic Node.js web application.
 
-Move to the next section after the **az container create** command is finished.
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - If you receive a success message, you can proceed to the next task.
+
+<validation step="2b5eee32-b290-4c07-ae35-fccf6d8d65c8" />
 
 ### Task 2: Verify the container is running
 

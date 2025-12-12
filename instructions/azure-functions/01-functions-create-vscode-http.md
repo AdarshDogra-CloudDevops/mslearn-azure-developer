@@ -119,11 +119,11 @@ These values will be reused by the commands that follow.
    - PLAN_NAME="funcplan<inject key="DeploymentID" enableCopy="false"/>"
  
     ```bash
-    RESOURCE_GROUP="<your-resource-group-name>"
-    LOCATION="<your-location>"
-    FUNCTIONAPP_NAME="<your-functionapp-name>"
-    STORAGE_NAME="<your-storage-account-name>"
-    PLAN_NAME="<your-plan-name>"
+    RESOURCE_GROUP="Serverless-<inject key="DeploymentID" enableCopy="false"/>"
+    LOCATION="funcplan<inject key="Region" enableCopy="false"/>"
+    FUNCTIONAPP_NAME="myfunctionapp<inject key="DeploymentID" enableCopy="false"/>"
+    STORAGE_NAME="funcstor<inject key="DeploymentID" enableCopy="false"/>"
+    PLAN_NAME="funcplan<inject key="DeploymentID" enableCopy="false"/>"
     ```
 
 2. Create a Storage Account required by the Function App to store logs and runtime metadata.

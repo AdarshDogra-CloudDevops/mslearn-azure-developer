@@ -171,16 +171,16 @@ These values will be reused by the commands that follow.
 
     ```bash
     az functionapp restart \
-    --name myfunctionapp2000987 \
-    --resource-group Serverless-2000987
+    --name myfunctionapp<inject key="DeploymentID" enableCopy="false"/> \
+    --resource-group Serverless-<inject key="DeploymentID" enableCopy="false"/>
     ```
 
     ### View live logs
 
     ```bash
     az functionapp log tail \
-    --name myfunctionapp2000987 \
-    --resource-group Serverless-2000987
+    --name myfunctionapp<inject key="DeploymentID" enableCopy="false"/> \
+    --resource-group Serverless-<inject key="DeploymentID" enableCopy="false"/>
     ```
 
 - Once all commands run successfully in Azure Cloud Shell, return to VS Code and perform Task 1 again.

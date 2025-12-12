@@ -7,7 +7,7 @@
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-api-mgmt/Lab01-getting-started-page.md",
                 "Order": 1
-            }
+            },
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/mslearn-azure-developer/refs/heads/prod/instructions/azure-api-mgmt/01-api-mgmt-import-api.md",
                 "Order": 2

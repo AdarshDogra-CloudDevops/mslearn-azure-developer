@@ -164,7 +164,7 @@ These values will be reused by the commands that follow.
 ---
 ## Troubleshooting Deployment
 
-1. If deployment fails, navigate bak to Azure cloud shell run:
+1. If deployment fails, navigate back to the Azure cloud shell run:
 
     ### Restart the Function App
 

@@ -1,4 +1,4 @@
-# Lab 09- Module 1: Create and Retrieve Secrets from Azure Key Vault
+# Lab 09: Module 1: Create and Retrieve Secrets from Azure Key Vault
 
 ## Lab Scenario
 In this exercise, you create an Azure Key Vault, store secrets using the Azure CLI, and build a .NET console application that can create and retrieve secrets from the key vault. You will learn how to configure authentication, manage secrets programmatically, and clean up resources when finished.
@@ -14,9 +14,9 @@ In this lab, you will perform:
 
 ## Estimated Timing: 30 minutes
 
-# Task 1: Create Azure Key Vault resources and add a secret
+## Task 1: Create Azure Key Vault resources and add a secret
 
-In this section of the exercise you create the needed resources in Azure with the Azure CLI.
+In this task you will create a Key Vault to store secrets in Azure using Azure CLI.
 
 1. Use the **[>_] (1)** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a **Bash (2)** environment.
 
@@ -37,7 +37,7 @@ In this section of the exercise you create the needed resources in Azure with th
 1. Run the following commands to create the needed variables to create an Azure key Vault. 
 
     ```
-    resourceGroup=ConfidentialStack
+    resourceGroup=ConfidentialStack-<inject key="DeploymentID" enableCopy="false"/>
     location=<inject key="Region" enableCopy="false"/>
     keyVaultName=mykeyvaultname<inject key="DeploymentID" enableCopy="false"/>
  
@@ -58,9 +58,9 @@ In this section of the exercise you create the needed resources in Azure with th
 
 <validation step="f9c5f427-4ea7-4d62-91b7-7cc85096f2a3" />
 
-# Task 2: Assign a role to your Microsoft Entra user name
+## Task 2: Assign a role to your Microsoft Entra user name
 
-To create and retrieve a secret, assign your Microsoft Entra user to the **Key Vault Secrets Officer** role. This gives your user account permission to set, delete, and list secrets. In a typical scenario you may want to separate the create/read actions by assigning the **Key Vault Secrets Officer** to one group, and **Key Vault Secrets User** (can get and list secrets) to another.
+In this task, you will assign your Microsoft Entra user the Key Vault Secrets Officer role to enable creating, deleting, and listing secrets.
 
 1. Run the following command to retrieve the **userPrincipalName** from your account. This represents who the role will be assigned to.
 
@@ -87,7 +87,9 @@ To create and retrieve a secret, assign your Microsoft Entra user to the **Key V
 
     ![](./media/entra.png)
 
-# Task 3: Add and retrieve a secret with Azure CLI
+## Task 3: Add and retrieve a secret with Azure CLI
+
+In this task, you will create a new secret in your Key Vault using Azure CLI and then retrieve it to verify that it was successfully stored.
 
 1. Run the following command to create a secret. 
 
@@ -112,7 +114,9 @@ To create and retrieve a secret, assign your Microsoft Entra user to the **Key V
 
     ![](./media/retsec.png)
 
-# Task 4: Create a .NET console app to store and retrieve secrets
+## Task 4: Create a .NET console app to store and retrieve secrets
+
+In this task, you will create a .NET console application in Azure Cloud Shell that will be used to store and retrieve secrets from your Key Vault.
 
 Now that the needed resources are deployed to Azure the next step is to set up the console application. The following steps are performed in the cloud shell.
 
@@ -359,7 +363,9 @@ Now it's time to add code to complete the application.
 
 1. Press **ctrl+s** to save the file, then **ctrl+q** to exit the editor.
 
-# Task 5: Sign into Azure and run the app to create a new secret
+## Task 5: Sign into Azure and run the app to create a new secret
+
+In this task, you will sign into Azure from Cloud Shell and authenticate your session so you can run the console app to create a new Key Vault secret.
 
 1. In the cloud shell, enter the following command to sign into Azure.
 
@@ -417,5 +423,18 @@ Now it's time to add code to complete the application.
 
 ## Summary
 
-In this lab, you created an Azure Key Vault and configured the required access to store and retrieve secrets securely. You added a secret using the Azure CLI, assigned the Key Vault Secrets Officer role to your Microsoft Entra account, and verified access by retrieving the stored secret. You then built a .NET console application that connects to Azure Key Vault using DefaultAzureCredential, allowing you to programmatically create and list secrets. Finally, you authenticated with Azure CLI, ran the application, and successfully tested secret creation and retrieval through the interactive menu system.
+In this lab, you:
 
+- Created a Key Vault and added a secret using Azure CLI.
+
+- Assigned the Key Vault Secrets Officer role to enable secret management.
+
+- Verified access by retrieving the stored secret.
+
+- You built a console application using DefaultAzureCredential to programmatically create and list secrets.
+
+- You authenticated using Azure CLI and successfully tested secret creation and retrieval through the app’s interactive menu.
+
+## You have successfully completed the lab. Click on Next >>
+
+![](./media/next.png)

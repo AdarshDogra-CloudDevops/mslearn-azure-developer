@@ -37,7 +37,7 @@ In this task, you will create an Azure App Configuration resource using the Azur
 1. Run the following commands to create the needed variables.
 
     ```
-    resourceGroup=ConfidentialStack
+    resourceGroup=ConfidentialStack-<inject key="DeploymentID" enableCopy="false"/>
     location=<inject key="Region" enableCopy="false"/>
     appConfigName=appconfig<inject key="DeploymentID" enableCopy="false"/>
     ```

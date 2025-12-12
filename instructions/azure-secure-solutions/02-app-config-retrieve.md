@@ -1,4 +1,4 @@
-# Module 2: Retrieve Configuration Settings from Azure App Configuration
+# Lab 09 - Module 2: Retrieve Configuration Settings from Azure App Configuration
 
 ## Lab Scenario
 In this exercise, you create an Azure App Configuration resource, store configuration settings using the Azure CLI, and build a .NET console application that uses the ConfigurationBuilder to retrieve configuration values. You learn how to organize settings with hierarchical keys and authenticate your application to access cloud-based configuration data.

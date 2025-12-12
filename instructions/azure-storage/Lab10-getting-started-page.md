@@ -1,25 +1,21 @@
-Lab 09: Secure Solutions in Azure
+# Lab 10: Create Blob Storage Resources with the .NET Client Library
 
-Welcome to **Lab 09: Secure Solutions in Azure**.  
+Welcome to **Lab 10: Create Blob Storage Resources with the .NET Client Library**.  
 This Getting Started page provides everything you need before beginning the exercises, including environment access instructions, navigation tips, and support details.
 
 ---
 
 ## Lab Overview
 
-In this lab, you will complete two modules:
+In this lab, you will:
 
-### **Module 1: Create and Retrieve Secrets from Azure Key Vault**
-- Create an Azure Key Vault  
-- Store and retrieve secrets using Azure CLI  
-- Build a .NET console app to interact with Key Vault  
+- Create an Azure Storage account  
+- Build a .NET console application  
+- Add authentication using DefaultAzureCredential  
+- Create a container, upload a blob, list blobs, and download a blob programmatically  
+- Verify results using the Azure portal  
 
-### **Module 2: Retrieve Configuration Settings from Azure App Configuration**
-- Create an App Configuration resource  
-- Add configuration data  
-- Build a .NET console app to retrieve settings  
-
-**Estimated Duration:** 45–60 minutes  
+**Estimated Duration:** 30 minutes
 
 ---
 
@@ -73,24 +69,18 @@ To zoom in/out of the environment view, use the **A↕ 100%** button near the ti
 
 Follow these steps to begin working in Azure:
 
-1. On your VM desktop, click the **Azure Portal** icon:
-
+1. On your VM desktop, click the **Azure Portal** icon:  
    ![](media/G6.png)
 
-2. Enter your credentials:
-
-   - **Email/Username:** `<inject key="AzureAdUserEmail"></inject>`
-
+2. Enter your credentials:  
+   - **Email/Username:** `<inject key="AzureAdUserEmail"></inject>`  
      ![](media/G7.png)
 
-3. Enter your password:
-
-   - **Password:** `<inject key="AzureAdUserPassword"></inject>`
-
+3. Enter your password:  
+   - **Password:** `<inject key="AzureAdUserPassword"></inject>`  
      ![](media/G8.png)
 
-4. If prompted to **Stay signed in**, select **No**.
-
+4. If prompted to **Stay signed in**, select **No**.  
    ![](media/G9.png)
 
 ---
@@ -99,7 +89,7 @@ Follow these steps to begin working in Azure:
 
 CloudLabs offers **24/7 support** for all learners.
 
-**Learner Support:**
+**Learner Support:**  
 - Email: cloudlabs-support@spektrasystems.com  
 - Live Chat: https://cloudlabs.ai/labs-support  
 
@@ -107,10 +97,12 @@ If you face login, VM, or Azure issues, reach out anytime.
 
 ---
 
-## Begin the Lab
+## Move to the Next Page
 
-Click **Next** at the bottom-right corner to begin **Module 1: Create and Retrieve Secrets from Azure Key Vault**.
+Click **Next** at the bottom-right corner to begin the first exercise.  
 
-   ![](media/G10.png)
+![Next](media/G10.png)
+
+---
 
 ## Happy Learning!
